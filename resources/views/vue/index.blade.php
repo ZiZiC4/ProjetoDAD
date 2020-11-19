@@ -42,10 +42,6 @@
 </div>
 
 
-
-
-
-
 <router-view></router-view> <!-- Para usar as rotas e não mostrar sempre os users -->
 
 @section('pphotoscript')
