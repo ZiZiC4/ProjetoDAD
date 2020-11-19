@@ -11,14 +11,12 @@
     <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 </head>
-            
+
 <body>
     <div class="container" id="app">
     </div>
     <script src="js/app.js"></script>
 </body>
-
-<<<<<<< HEAD
 </html>
 
 =======
@@ -51,30 +49,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <router-view></router-view> <!-- Para usar as rotas e não mostrar sempre os users -->
 
 @endsection
 @section('pphotoscript')
 <script src="js/app.js"></script>
 @stop
->>>>>>> 0e15583b08b506a2d23f5b548130508518ab9af3
