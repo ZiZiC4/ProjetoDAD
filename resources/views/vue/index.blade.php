@@ -29,9 +29,58 @@
     </div>
 </div>
 
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>type</th>
+            <th>photo</th>
+            <th>price</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr v-for="product in products"  :key="product.id" :class="{active: currentproduct === product}">
+            <td>@{{ product.name }}</td>
+            <td>@{{ product.type }}</td>
+            <td>@{{ product.photo }}</td>
+            <td>@{{ product.price }}</td>
+            <td>@{{ product.description }}</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <router-view></router-view> <!-- Para usar as rotas e não mostrar sempre os users -->
 
 @endsection
-@section('pagescript')
+@section('pphotoscript')
 <script src="js/app.js"></script>
 @stop
