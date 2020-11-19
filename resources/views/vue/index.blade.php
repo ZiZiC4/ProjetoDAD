@@ -19,9 +19,6 @@
 </body>
 </html>
 
-=======
-
-
 <table class="table table-striped">
     <thead>
         <tr>
@@ -51,7 +48,6 @@
 
 <router-view></router-view> <!-- Para usar as rotas e não mostrar sempre os users -->
 
-@endsection
 @section('pphotoscript')
 <script src="js/app.js"></script>
 @stop
