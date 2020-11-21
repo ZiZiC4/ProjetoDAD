@@ -4,32 +4,34 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-import Toasted from "vue-toasted";
 
-Vue.use(Toasted, {
-    position: "bottom-center",
-    duration: 5000,
-    type: "info"
-});
+
 
 
 import Home from './components/home'
 import User from './components/users'
 
-const home = Vue.component("home", Home);
-const user = Vue.component("users", User);
+//const home = Vue.component("home", Home);
+//const user = Vue.component("users", User);
 
-import { BPagination } from 'bootstrap-vue'
-Vue.component('b-pagination', BPagination)
+
 
 
 
 const routes = [
     { path: "/", component: Home},
-    { path: "/users", component: User, name: "users"}
+    { path: "/users", component: User}
 ]
 
 const router = new VueRouter({
-    routes // é como termos routes:routes
+    routes:routes // é como termos routes:routes
 })
 
+import App from './App.vue'
+new Vue({
+    render: h => h(App),
+    router,
+    data: {
+
+    }
+}).$mount('#app')
