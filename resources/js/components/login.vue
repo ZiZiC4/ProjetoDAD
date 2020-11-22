@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="alert" :class="msgtype" v-if="showMessage">
+        <div class="alert" :class="msgType" v-if="showMessage">
             <button type="button" 
                 class="close-btn" 
                 v-on:click="showMessage = false">&chi;</button>
@@ -40,7 +40,7 @@ export default {
                 email: "",
                 password: ""
             },
-            msgtype: "alert-success",
+            msgType: "alert-success",
             showMessage: false,
             message: ""
         };
