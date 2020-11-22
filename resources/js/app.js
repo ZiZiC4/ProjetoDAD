@@ -10,6 +10,8 @@ Vue.use(VueRouter)
 
 import Home from './components/home'
 import User from './components/users'
+import Login from './components/login'
+import Logout from './components/logout'
 
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
@@ -20,7 +22,9 @@ import User from './components/users'
 
 const routes = [
     { path: "/", component: Home},
-    { path: "/users", component: User}
+    { path: "/users", component: User},
+    { path: "/login", component: Login, name: "login"},
+    { path: "/logout", component: Logout, name: "logout"}
 ]
 
 const router = new VueRouter({
