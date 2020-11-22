@@ -11,7 +11,7 @@ class Order extends Model
 
     //perguntar amanha
     public function products(){
-    	return $this->belongsToMany('App\Models\Product','order_items','order_id','product_id');
+    	return $this->belongsToMany('App\Models\Product','order_items','order_id','product_id')->using('App\Models\OrderItem');
     }
 
     public function userPrepared(){

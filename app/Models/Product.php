@@ -9,11 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-    ];
-
     public function orders(){
-    	return $this->belongsToMany('App\Models\Order','order_items','product_id','order_id');
+    	return $this->belongsToMany('App\Models\Order','order_items','product_id','order_id')->using('App\Models\OrderItem');
     }
 }

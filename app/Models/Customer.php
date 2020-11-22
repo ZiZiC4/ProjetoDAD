@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Model\User;
 
-class Customer extends User
+
+class Customer extends Model
 {
     use HasFactory;
 
-    public function users(){
+
+    public function user(){
         return $this->belongsTo('App\Models\User','id','id');
     }
 

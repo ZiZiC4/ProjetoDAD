@@ -41,9 +41,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //perguntar amanha
-    public function customers(){
-        return $this->hasMany('App\Models\Customer','id','id');
+  
+    public function customer(){
+        return $this->hasOne('App\Models\Customer','id','id');
     }
 
     public function ordersPrepared(){
