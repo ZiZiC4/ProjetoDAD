@@ -4,87 +4,62 @@
             <h1>{{ title }}</h1>
         </div>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <input type="text" name="name" class="form-control" placeholder="Search by user name" v-model="search.name">
+        <user-list :users="users" :selected-user="currentUser" v-on:edit-click="editClick"></user-list>
 
-                    </td>
-                    <td>
-                        <select name="type" class="form-control" v-model="search.type">
-                            <option value='' selected> Type of User</option>
-                            <option value="c">Customer</option>
-                            <option value="ec">Employee-Cook</option>
-                            <option value="ed">Employee-Deliveryman</option>
-                            <option value="em">Employee-Manager</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="email" name="email" class="form-control" placeholder="Search by e-mail" v-model="search.email">
-                    </td>
-                    <td>
-                        <button type="submit" class="btn btn-primary" v-on:click="getSearched()">Search</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>  
+        <div class="alert alert-success" v-if="showSuccess">
+            <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
+            <strong>{{ successMessage }}</strong>
+        </div>
         
+        <user-edit :user="currentUser" :departments="departments" 
+        v-on:user-saved="saveUserClick" @user-canceled="cancelEditClick" v-if="editingUser"></user-edit>
             
     </div>
 </template>
 
 <script>
-import UserList from "./userList.vue";
-
+import UserListComponent from "./userList"
+import UserEditComponent from './userEdit'
 export default {
+   components:{
+        'user-list': UserListComponent,
+        //'user-edit': UserEditComponent
+    },
     data: function(){
-        return{
-            title: "Users List",
-            listUsers: true,
-            showSuccess: false,
-            showFailure: false,
-            users: [],
-            search:{
-                name:'',
-                type:'',
-                email:'',
-            }
-        };
+    	return {
+	        title: 'List Users',
+	        editingUser: false,
+	        showSuccess: false,
+	        showFailure: false,
+	        successMessage: '',
+	        failMessage: '',
+	        currentUser: null,
+	        users: []
+        }
     },
-    methods:{
-        getSearched(){
-            this.showSuccess = false;
-            this.showFailure = false;
-            axios.post('api/users/filter?page='+page, this.search)
-            .then(response=>{
-                console.log(response.data.data)
-                this.users = response.data.data;
-            }).catch(error=>{
-                this.failMessage = "Can't get the users! ERROR!"
-                this.showFailure = true;
-                this.showSuccess = false;
-            });
+    methods: {
+        editClick: function(user){
+            this.currentUser = user
+            this.editingUser = true
+            this.showSuccess = false
         },
-
-        getUsers: function(){
+        saveUserClick: function (user) {
+            this.editingUser = false
+            this.showSuccess = true
+            this.successMessage = 'User Saved'
+            this.currentUser = null
+            
+        },
+        cancelEditClick: function () {
+            this.showSuccess = false
+            this.editingUser = false
+            
+        },
+        getUsers: function () {
             axios.get('api/users')
-            .then(response=>{
-                console.log(response)
-                this.users = response.data.data;
-            });
-        },
-    },
-
-        components: {
-            "user-list": UserList,
-        }   
+                .then(response => { this.users = response.data.data })
+        }
+    }   
 }
 </script>
 
