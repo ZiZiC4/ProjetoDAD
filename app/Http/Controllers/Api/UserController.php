@@ -21,7 +21,7 @@ class UserController extends Controller
         }
     }
 
-    public function me(Request $request)
+    public function me (Request $request)
  {
      return Auth::user();
  }
