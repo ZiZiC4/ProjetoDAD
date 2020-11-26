@@ -32,6 +32,7 @@ export default {
     },
      methods: {
  logout () {
+     console.log('logout')
  axios.post('/api/logout').then(response => {
  console.log('User has logged out')
  })
