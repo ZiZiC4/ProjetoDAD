@@ -8,6 +8,7 @@ use App\Http\Resources\User as UserResource;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -19,6 +20,11 @@ class UserController extends Controller
             return UserResource::collection(User::all());
         }
     }
+
+    public function me(Request $request)
+ {
+     return Auth::user();
+ }
 
     public function show(User $user)
     {
