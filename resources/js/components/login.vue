@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="alert" :class="msgType" v-if="showMessage">
-            <button type="button" 
-                class="close-btn" 
+            <button type="button"
+                class="close-btn"
                 v-on:click="showMessage = false">&chi;</button>
             <strong>{{ message }}</strong>
         </div>
