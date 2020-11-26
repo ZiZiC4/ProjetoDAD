@@ -13,5 +13,15 @@
 
 <script>
 export default {
+ methods: {
+ logout () {
+ axios.post('/api/logout').then(response => {
+ console.log('User has logged out')
+ })
+ .catch(error => {
+ console.log('Invalid Logout')
+ })
+ }
+ }
 }
 </script>
