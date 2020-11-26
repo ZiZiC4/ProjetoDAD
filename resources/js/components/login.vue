@@ -47,7 +47,15 @@ export default {
     },
     methods: {
         login() {
-            console.log('Login')
+            axios.get('/sanctum/csrf-cookie').then(response => {
+            axios.post('/api/login', this.credentials).then(response => {
+            console.log('User has logged in')
+            console.dir(response.data)
+        })
+        .catch(error => {
+            console.log('Invalid Authentication')
+        })
+            })
         }
     }
 }

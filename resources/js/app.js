@@ -11,8 +11,8 @@ Vue.use(VueRouter)
 import Home from './components/home'
 import UserComponent from './components/users'
 //import UserProfile from './components/userProfile'
-import Login from './components/login'
-import Logout from './components/logout'
+import LoginComponent from './components/login'
+import LogoutComponent from './components/logout'
 
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
