@@ -12,7 +12,7 @@
                 <label for="inputEmail">E-Mail</label>
                 <input type="email"
                     class="form-control"
-                    v-model="user.email"
+                    v-model="credentials.email"
                     name="email"
                     id="inputEmail"
                     placeholder="Email address">
@@ -21,7 +21,7 @@
                 <label for="inputPassword">Password</label>
                 <input type="password"
                     class="form-control"
-                    v-model="user.password"
+                    v-model="credentials.password"
                     name="password"
                     id="inputPassword">
             </div>
@@ -36,14 +36,19 @@
 export default {
     data: function(){
         return{
-            user: {
-                email: "",
-                password: ""
+            credentials: {
+                email: '',
+                password: ''
             },
             msgType: "alert-success",
             showMessage: false,
             message: ""
         };
     },
+    methods: {
+        login() {
+            console.log('Login')
+        }
+    }
 }
 </script>

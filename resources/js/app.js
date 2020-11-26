@@ -24,8 +24,8 @@ import Logout from './components/logout'
 const routes = [
     { path: "/", component: Home},
     { path: "/users", component: UserComponent},
-    { path: "/login", component: Login, name: "login"},
-    { path: "/logout", component: Logout, name: "logout"}
+    { path: "/login", component: LoginComponent},
+    { path: "/logout", component: LogoutComponent}
 ]
 
 const router = new VueRouter({
