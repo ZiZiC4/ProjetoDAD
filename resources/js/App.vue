@@ -4,8 +4,7 @@
         <router-link to="/users">Users</router-link>
         <router-link to="/login">Login</router-link>
         <router-link to="/logout">Logout</router-link>
-
-        <router-link to="/login">Login</router-link>
+        <router-link to="/products">Menu</router-link>
 
         <router-view></router-view>
     </div>

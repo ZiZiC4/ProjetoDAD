@@ -13,6 +13,7 @@ import UserComponent from './components/users'
 //import UserProfile from './components/userProfile'
 import LoginComponent from './components/login'
 import LogoutComponent from './components/logout'
+import Product from './components/product'
 
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
@@ -25,7 +26,8 @@ const routes = [
     { path: "/", component: Home},
     { path: "/users", component: UserComponent},
     { path: "/login", component: LoginComponent},
-    { path: "/logout", component: LogoutComponent}
+    { path: "/logout", component: LogoutComponent},
+    { path: "/products", component: Product}
 ]
 
 const router = new VueRouter({
