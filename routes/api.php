@@ -21,13 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/users',[UserController::class, 'index']);
 Route::get('/products',[ProductController::class, 'index']);
+
 Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout']);
-
-
+//desta forma só quem está autenticado pode invocar o logout
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
 Route:: middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
-
-//USERS
-//Route::middleware('auth:api')->get('users', '/Api/UserController@index');

@@ -12,7 +12,7 @@ import Home from './components/home'
 import UserComponent from './components/users'
 //import UserProfile from './components/userProfile'
 import LoginComponent from './components/login'
-import LogoutComponent from './components/logout'
+//import LogoutComponent from './components/logout'
 import Product from './components/product'
 
 //const home = Vue.component("home", Home);
@@ -24,9 +24,9 @@ import Product from './components/product'
 
 const routes = [
     { path: "/", component: Home},
-    { path: "/users", component: UserComponent},
     { path: "/login", component: LoginComponent},
-    { path: "/logout", component: LogoutComponent},
+    { path: "/users", component: UserComponent},
+    //{ path: "/logout", component: LogoutComponent},
     { path: "/products", component: Product}
 ]
 

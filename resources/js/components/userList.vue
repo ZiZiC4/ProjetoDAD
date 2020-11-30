@@ -27,14 +27,28 @@
 
 <script>
 export default {
+    data:function(){
+        return{
+            users: []
+        }
+    },
        props:[
            'users',
            'selectedUser'
        ],
     methods:{
+        getUser: function(){
+            axios.get('api/users')
+            .then(response => {
+                this.users = response.data.data
+            })
+        },
         editUser(user){
             this.$emit('edit-click',user)
         }
+    },
+    mounted (){
+        this.getUser();
     }
-};
+}
 </script>
