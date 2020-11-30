@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('manager');
+    }
+
     public function index(Request $request)
     {
         if ($request->has('page')) {
