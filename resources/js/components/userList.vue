@@ -7,7 +7,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users"  :key="user.id" :class="{active: selectedUser === user}">
+                <tr v-for="user in users"  :key="user.id" :class="{active: editingUser === user}">
                     <!-- <td v-if="user.photo"><img v-bind:src="'' + user.photo" style="width:75px; height:75px; border-radius:50%;"></td>
                     <td v-if="!user.photo"><img v-bind:src="''" style="width:75px; height:75px; border-radius:50%;"></td> -->
                     <td>{{ user.name }}</td>
@@ -27,28 +27,29 @@
 
 <script>
 export default {
-    data:function(){
-        return{
-            users: []
-        }
-    },
-       props:[
+    props:[
            'users',
            'selectedUser'
        ],
-    methods:{
-        getUser: function(){
-            axios.get('api/users')
-            .then(response => {
-                this.users = response.data.data
-            })
-        },
-        editUser(user){
-            this.$emit('edit-click',user)
+    data:function(){
+        return{
+            editingUser: null
         }
     },
-    mounted (){
-        this.getUser();
-    }
+    watch: {
+        selectedUser: function (val) {
+            this.editingUser = this.selectedUser
+        },
+    },
+    methods:{
+        editUser: function (user){
+            this.editingUser = user
+            this.$emit('edit-click',user)
+        },
+        deleteUser: function(user){
+            this.editingUser = null
+            this.$$emit('delete-click', user)
+        }
+    },
 }
 </script>
