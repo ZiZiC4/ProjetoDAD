@@ -37,7 +37,8 @@ class UserController extends Controller
         $user->fill($request->validated());
         $user->password = bcrypt($user->password);
         $user->save();
-        return response()->json(new UserResource($user), 201);
+        return new UserResource($user);
+        //return response()->json(new UserResource($user), 201);
     }
 
 
@@ -51,7 +52,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return response()->json(null, 204);
+        //return response()->json(null, 204);
     }
 
 

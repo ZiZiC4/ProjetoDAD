@@ -31,7 +31,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    routes:routes // é como termos routes:routes
+    routes:routes
 })
 
 import App from './App.vue'
