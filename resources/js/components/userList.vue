@@ -14,6 +14,7 @@
                     <td>{{ user.email }}</td>
                     <td>
                         <a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)">Edit</a>
+                        <a class="btn btn-xs btn-danger" v-on:click.prevent="deleteUser(user)">Delete</a>
                     </td>
 
                     <td v-if="user.type == 'c'">Customer</td>

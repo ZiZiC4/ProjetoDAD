@@ -31,3 +31,6 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 
 //USERS
 Route:: middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
+Route::put('users/{user}',  [UserController::class, 'update']);
+Route::delete('users/{user}',  [UserController::class, 'delete']);
+

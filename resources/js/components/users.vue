@@ -68,10 +68,10 @@ export default {
             Object.assign(this.currentUser, user)
             this.currentUser = null;
         },
-        cancelEditClick: function() {
+        cancelEdit: function() {
             this.showSuccess = false;
             Object.assign(this.currentUser, user)
-            this.editingUser = false;
+            this.currentUser = false;
         },
         getUsers: function() {
             axios.get("api/users").then(response => {
