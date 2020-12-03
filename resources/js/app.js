@@ -4,9 +4,14 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+import Toasted from 'vue-toasted'
+Vue.use(Toasted, {
+    position: 'top-center',
+    duration: 5000,
+    type: 'info',
+})
 
-
-
+import store from "./stores/global-store"
 
 import Home from './components/home'
 import UserComponent from './components/users'
@@ -38,7 +43,20 @@ import App from './App.vue'
 new Vue({
     render: h => h(App),
     router,
+    store,
     data: {
 
     }
 }).$mount('#app')
+
+router.beforeEach((to, from, next) => {
+    console.log(to)
+    if(!store.state.user) {
+        if ((to.path === '/users')) {
+            console.log('Não tem permissões')
+            next(false)
+            return
+        }
+    }
+    next()
+})
