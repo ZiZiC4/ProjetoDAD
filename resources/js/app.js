@@ -19,6 +19,7 @@ import UserComponent from './components/users'
 import LoginComponent from './components/login'
 //import LogoutComponent from './components/logout'
 import Product from './components/product'
+import userProfile from './components/userProfile'
 
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
@@ -32,7 +33,8 @@ const routes = [
     { path: "/login", component: LoginComponent},
     { path: "/users", component: UserComponent},
     //{ path: "/logout", component: LogoutComponent},
-    { path: "/products", component: Product}
+    { path: "/products", component: Product},
+    { path: "/userProfile", component: userProfile}
 ]
 
 const router = new VueRouter({
