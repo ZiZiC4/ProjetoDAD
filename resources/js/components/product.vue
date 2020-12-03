@@ -1,5 +1,12 @@
 <template>
   <div>
+    <select>
+       <option value="">Type of Product</option>
+       <option value="hot dish">Hot Dish</option>
+       <option value="cold dish">Cold Dish</option>
+       <option value="drink">Drink</option>
+       <option value="dessert">Dessert</option>
+    </select>
    <input v-model="searchFor" type="text">
     <table class="table table-striped">
       <thead>
@@ -13,7 +20,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="product in products"
+          v-for="product in filterTerm"
           :key="product.id"
         >
           <td>{{ product.name }}</td>
@@ -32,7 +39,8 @@ export default {
     data:function(){
         return{
             products: [],
-            searchFor: ""
+            searchFor: "",
+            searchType: ""
         }
     },
     methods:{
@@ -46,9 +54,22 @@ export default {
     },
     computed: {
         filterTerm(){
-          return this.products.filter(product => {
-            return product.name.toLowerCase().includes(this.searchFor)
+          var produtos = this.products
+          var nomeProduto = this.searchFor.toLocaleLowerCase()
+
+          if(!nomeProduto){
+            return produtos
+          }
+
+          //var search = nomeProduto.trim().toLowerCase()
+
+          produtos = produtos.filter(function(item){
+            if(item.name.toLowerCase().indexOf(nomeProduto)!=-1){
+              return item;
+            }
           })
+
+          return produtos;
         }
     },
     mounted () {
@@ -56,3 +77,13 @@ export default {
     }
 }
 </script>
+
+<style>
+.table {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  color: #212529;
+}
+</style>
+
