@@ -1,13 +1,13 @@
 <template>
   <div>
-    <select>
+    <select v-model="searchByType">
        <option value="">Type of Product</option>
        <option value="hot dish">Hot Dish</option>
        <option value="cold dish">Cold Dish</option>
        <option value="drink">Drink</option>
        <option value="dessert">Dessert</option>
     </select>
-   <input v-model="searchFor" type="text">
+   <input v-model="searchByName" type="text">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -39,8 +39,8 @@ export default {
     data:function(){
         return{
             products: [],
-            searchFor: "",
-            searchType: ""
+            searchByName: "",
+            searchByType: ""
         }
     },
     methods:{
@@ -55,19 +55,40 @@ export default {
     computed: {
         filterTerm(){
           var produtos = this.products
-          var nomeProduto = this.searchFor.toLocaleLowerCase()
+          var nomeProduto = this.searchByName.toLocaleLowerCase()
+          var tipoProduto = this.searchByType
 
-          if(!nomeProduto){
+          if(!nomeProduto && !tipoProduto){
             return produtos
           }
 
-          //var search = nomeProduto.trim().toLowerCase()
-
-          produtos = produtos.filter(function(item){
-            if(item.name.toLowerCase().indexOf(nomeProduto)!=-1){
-              return item;
+          
+          if(nomeProduto){
+            if(!tipoProduto){
+              produtos = produtos.filter(function(item){
+                if(item.name.toLowerCase().indexOf(nomeProduto)!=-1){
+                  return item;
+                }
+              })
+            }else{
+              produtos = produtos.filter(function(item){
+                if(item.name.toLowerCase().indexOf(nomeProduto)!=-1){
+                  return item;
+                }
+              })
+              produtos = produtos.filter(function(item){
+                if(item.type.indexOf(tipoProduto)!=-1){
+                  return item;
+                }
+              })
             }
-          })
+          }else{
+            produtos = produtos.filter(function(item){
+                if(item.type.indexOf(tipoProduto)!=-1){
+                  return item;
+                }
+              })
+          }
 
           return produtos;
         }
