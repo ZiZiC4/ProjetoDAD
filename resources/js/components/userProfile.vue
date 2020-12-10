@@ -66,6 +66,19 @@ export default {
         }
     },
     methods:{
+        profileEdit: function(user){
+            this.showFailure = false;
+            this.showSuccess = false;
+            this.editingProfile = true;
+        },
+
+        profileModif: function(){
+            this.showSuccess = true;
+            this.showFailure = false;
+            this.editingProfile = false;
+            this.successMessage = 'User successfully modified';
+            this.user= this.$store.state.user; 
+        }
         
     },
     components:{
