@@ -9,7 +9,7 @@
           <router-link to="/login">Login</router-link> #
         </template>
         <router-link to="/userProfile">userProfile</router-link> #
-
+        <router-link to="/users/newAccount">Register </router-link>
         <!--<router-link to="/logout">Logout</router-link>-->
         <a href="#" @click.prevent="logout">Logout</a> #
         <a href="#" @click.prevent="myself">Myself</a>
