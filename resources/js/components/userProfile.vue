@@ -15,7 +15,7 @@
                 <td>Name:</td>
                 <td>{{ this.user.name }}</td>
             </tr>
-            <tr v-if="user.type == 'u'">
+            <tr v-if="user.type == 'C'">
                 <td>NIF:</td>
                 <td>{{ this.user.nif}}</td>
             </tr>

@@ -42,6 +42,7 @@ Route::middleware('auth:api')->get('users/statsInative', 'UserController@getAllU
 
 
 Route::get('/users',[UserController::class, 'index'])->middleware('manager');
+Route::post('users/newAccount', [UserController::class, 'store']);
 Route::get('/products',[ProductController::class, 'index']);
 
 Route::post('login', [AuthController::class, 'login']);

@@ -43,9 +43,29 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:3',
+            'address' => 'required|min:5',
+            'phone' => 'required|min:9',
+            'nif' => 'integer|digits:9'
+        ]);
+
+        if($request->photo['base64']){
+            $photo = $request->photo;
+            $base64str = explode(',', $photo['base64']);
+            $imageBin = base64_decode($base64str[1]);
+            if(!Storage::disk('public')->exists('fotos/' . $photo['name'])){
+                Storage::disk('public')->put('fotos/' . $photo['name'], $imageBin);
+            }
+        }
+
         $user = new User();
         $user->fill($request->validated());
-        $user->password = bcrypt($user->password);
+        //$user->fill($request->all());
+        $user->password = Hash::make($user->password);
+        $user->photo = $request->photo['base64'] ? $request->photo['name'] : null;
         $user->save();
         return new UserResource($user);
         //return response()->json(new UserResource($user), 201);
