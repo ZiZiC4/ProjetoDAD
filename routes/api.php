@@ -40,7 +40,7 @@ Route::middleware('auth:api')->get('users/profile', 'UserController@profileRefre
 Route::middleware('auth:api')->get('users/statsInative', 'UserController@getAllUsersInatives');
 */
 
-
+Route::get('/cookDashboard');
 Route::get('/users',[UserController::class, 'index'])->middleware('manager');
 Route::post('users/newAccount', [UserController::class, 'store']);
 Route::get('/products',[ProductController::class, 'index']);

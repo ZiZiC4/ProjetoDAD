@@ -5,6 +5,9 @@
         <template v-if="$store.state.user && this.$store.state.user.type == 'EM'">
           <router-link to="/users">Users</router-link> #
         </template>
+        <template v-if="$store.state.user && this.$store.state.user.type == 'EC'">
+          <router-link to="/cookDashboard">Dashboard</router-link>
+        </template>
         <template v-if="!$store.state.user">
           <router-link to="/login">Login</router-link> #
         </template>
