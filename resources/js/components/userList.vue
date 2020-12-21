@@ -17,10 +17,10 @@
                         <a class="btn btn-xs btn-danger" v-on:click.prevent="deleteUser(user)">Delete</a>
                     </td>
 
-                    <td v-if="user.type == 'c'">Customer</td>
-                    <td v-if="user.type == 'ec'">Employee-Cook</td>
-                    <td v-if="user.type == 'ed'">Employee-Deliveryman</td>
-                    <td v-if="user.type == 'em'">Employee-Manager</td>
+                    <td v-if="user.type == 'C'">Customer</td>
+                    <td v-if="user.type == 'EC'">Employee-Cook</td>
+                    <td v-if="user.type == 'ED'">Employee-Deliveryman</td>
+                    <td v-if="user.type == 'EM'">Employee-Manager</td>
                 </tr>
             </tbody>
     </table>

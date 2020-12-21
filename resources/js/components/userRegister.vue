@@ -154,6 +154,19 @@ export default {
         }
     },
     methods: {
+        onImageChange: function (event){
+            let image = event.target.files[0];
+            this.user.photo.name = image.name;
+            this.createImage(image);
+        },
+        createImage: function (file){
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                this.user.photo.base64 = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
+
         registerUser: function () {
             axios
                 .post("api/users/newAccount", this.user)

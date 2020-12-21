@@ -2,13 +2,15 @@
     <div>
         <router-link to="/">Home</router-link>
         <router-link to="/products">Menu</router-link>
-        <template v-if="$store.state.user">
+        <template v-if="$store.state.user && this.$store.state.user.type == 'EM'">
           <router-link to="/users">Users</router-link> #
         </template>
         <template v-if="!$store.state.user">
           <router-link to="/login">Login</router-link> #
         </template>
+        <template v-if="$store.state.user">
         <router-link to="/userProfile">userProfile</router-link> #
+        </template>
         <router-link to="/users/newAccount">Register </router-link>
         <!--<router-link to="/logout">Logout</router-link>-->
         <a href="#" @click.prevent="logout">Logout</a> #

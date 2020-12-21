@@ -31,7 +31,7 @@ import UserRegister from './components/userRegister'
 const routes = [
     { path: "/", component: Home},
     { path: "/login", component: LoginComponent},
-    { path: "/users", component: UserComponent},
+    { path: "/users", component: UserComponent, name: "users"},
     //{ path: "/logout", component: LogoutComponent},
     { path: "/products", component: Product},
     { path: "/userProfile", component: UserProfile},

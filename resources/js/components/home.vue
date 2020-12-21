@@ -1,8 +1,7 @@
 <template>
-<div style=" height: 400px; background-image:url('https://distillery.com/content/uploads/2018/11/hero-background-desktop@2x.jpg%27); background-size:100%;">
+<div style=" height: 1000px; background-image:url(https://images.pexels.com/photos/905847/pexels-photo-905847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260); background-size:100%;">
 
-<h1 style="color:#fff" class="text-center">WELCOME TO FOOD@HOME</h1>
-<a>Here we cook and delivery your meals if u pay of course</a>
+<h1 style="color:#0F4C50" class="text-center">WELCOME TO FOOD@HOME</h1>
 </div>
 
 </template>
