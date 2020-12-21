@@ -6,10 +6,10 @@
 
         <table class="table table-striped">
             <tr v-if="user.photo == null">
-                <td><img v-bind:src="'storage/fotos/noimage.jpg'" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
+                <td><img v-bind:src="'../storage/fotos/1_5fdb48c5e2d1d.jpg'" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
             </tr>
             <tr v-if="user.photo != null">
-                <td><img v-bind:src="'storage/fotos/' + user.photo" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
+                <td><img :src="'storage/app/fotos/' + user.photo" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
             </tr>
             <tr>
                 <td>Name:</td>
@@ -53,7 +53,7 @@ export default {
                         id: this.$store.state.user.id,
                         name: this.$store.state.user.name,
                         nif: this.$store.state.user.nif,
-                        photo: this.$store.state.user.photo,   
+                        photo: this.$store.state.user.photo_url,   
                         email: this.$store.state.user.email,
                         type: this.$store.state.user.type
                 },

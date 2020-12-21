@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
-use App\User;
+use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 
 /*
@@ -44,7 +44,6 @@ Route::middleware('auth:api')->get('users/statsInative', 'UserController@getAllU
 Route::get('/users',[UserController::class, 'index'])->middleware('manager');
 Route::post('users/newAccount', [UserController::class, 'store']);
 Route::get('/products',[ProductController::class, 'index']);
-
 Route::post('login', [AuthController::class, 'login']);
 //desta forma só quem está autenticado pode invocar o logout
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
