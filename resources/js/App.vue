@@ -11,10 +11,13 @@
         <template v-if="$store.state.user">
         <router-link to="/userProfile">userProfile</router-link> #
         </template>
+        
         <router-link to="/users/newAccount">Register </router-link>
+        
         <!--<router-link to="/logout">Logout</router-link>-->
         <a href="#" @click.prevent="logout">Logout</a> #
         <a href="#" @click.prevent="myself">Myself</a>
+        
 
         <router-view></router-view>
     </div>
