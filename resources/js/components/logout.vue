@@ -24,23 +24,30 @@
 <script>
 export default {
     data: function() {
-        return{
+        return {
             msgType: "alert-success",
             showMessage: false,
             message: ""
         };
     },
-     methods: {
- logout () {
-     console.log('logout')
- axios.post('/api/logout').then(response => {
- console.log('User has logged out')
- })
- .catch(error => {
- console.log('Invalid Logout')
- })
- }
- }
-
-}
+    methods: {
+        logout() {
+            this.showMessage = false;
+            console.log("logout");
+            axios
+                .post("/api/logout")
+                .then(response => {
+                    console.log("User has logged out");
+                    this.$router.push('/')
+                    this.$toasted.show("User logged out");
+                })
+                .catch(error => {
+                    console.log("Invalid Logout");
+                    this.msgType = "alert-danger";
+                    this.message = "Logout credentials incorrect";
+                    this.showMessage = true;
+                });
+        }
+    }
+};
 </script>

@@ -24,7 +24,7 @@
                 />
             </div>
             
-            <div class="form-group" v-if="user.type == 'u'">
+            <div class="form-group" v-if="user.type == 'C'">
                 <label for="inputNif">NIF</label>
                 <input
                     type="text" class="form-control" v-model="nif"
@@ -60,16 +60,6 @@
                 <a class="btn btn-primary" v-on:click.prevent="saveProfile()">Save</a>
                 <a class="btn btn-light" v-on:click.prevent="cancelEdit()">Cancel</a>
             </div>
-
-            <!--<div class="alert alert-success" v-if="showSuccess">
-                <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
-                <strong>{{ successMessage }}</strong>
-            </div>
-
-            <div class="alert alert-danger" v-if="showFailure">
-                <button type="button" class="close-btn" v-on:click="showFailure=false">&times;</button>
-                <strong>{{ failMessage }}</strong>
-            </div>-->
         </div>
     </div>  
 </template>
@@ -93,7 +83,6 @@ export default {
         }
     },
     methods:{
-
         onImageChange: function(event){
             let image = event.target.files[0];
             this.photo = image.name;
@@ -108,9 +97,7 @@ export default {
             };
             reader.readAsDataURL(file);
             
-        },
-
-        
+        },        
         saveProfile: function(){
 
            if(this.password == ''){
@@ -153,7 +140,7 @@ export default {
                     this.$emit('profile-modif');
                 })
                 .catch(error =>{
-                   if(error.response.data == "Old Password is incorrect !")
+                   if(error.response.data == "Old Password is incorrect!")
                         {
                             this.$emit('profile-erro-pass');
                         }
@@ -177,7 +164,6 @@ export default {
                 }
             }  
         },
-
         cancelEdit: function(){
             this.$emit('cancel-edit')
         },

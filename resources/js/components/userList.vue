@@ -4,17 +4,23 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Actions</th>
+                    <th>Role</th>
+                    <th>State</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users"  :key="user.id" :class="{active: editingUser === user}">
+                <tr v-for="user in users"  :key="user.id" :class="{active: currentUser === user}">
                     <!-- <td v-if="user.photo"><img v-bind:src="'' + user.photo" style="width:75px; height:75px; border-radius:50%;"></td>
                     <td v-if="!user.photo"><img v-bind:src="''" style="width:75px; height:75px; border-radius:50%;"></td> -->
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
+                    <td v-if="user.blocked==0">Active</td>
+                    <td v-if="user.blocked==1">Blocked</td>
+                    <td v-if="user.type != 'C' || user.type == 'EC' || user.type == 'ED'"> - </td>
                     <td>
-                        <a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)">Edit</a>
-                        <a class="btn btn-xs btn-danger" v-on:click.prevent="deleteUser(user)">Delete</a>
+                        <!--<a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)">Edit</a>-->
+                        <a class="btn btn-xs btn-danger" v-if="user.id != currentUser.id" v-on:click.prevent="deleteUser(user)">Delete</a>
                     </td>
 
                     <td v-if="user.type == 'C'">Customer</td>
@@ -28,29 +34,21 @@
 
 <script>
 export default {
-    props:[
-           'users',
-           'selectedUser'
-       ],
+    props:['users'],
     data:function(){
         return{
-            editingUser: null
+            currentUser: this.$store.state.user
         }
-    },
-    watch: {
-        selectedUser: function (val) {
-            this.editingUser = this.selectedUser
-        },
     },
     methods:{
-        editUser: function (user){
-            this.editingUser = user
-            this.$emit('edit-click',user)
+        editUser(user){
+            this.currentUser = user //faz com que o click em edit fique a azul
+            this.$emit('edit-user',user)
         },
-        deleteUser: function(user){
-            this.editingUser = null
-            this.$$emit('delete-click', user)
+        deleteUser(user){
+            this.$emit('delete-user', user)
         }
-    },
+        //fazer metodo blockedUser
+    }
 }
 </script>

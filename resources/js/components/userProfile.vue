@@ -9,7 +9,7 @@
                 <td><img v-bind:src="'../storage/fotos/1_5fdb48c5e2d1d.jpg'" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
             </tr>
             <tr v-if="user.photo != null">
-                <td><img :src="'storage/app/fotos/' + user.photo" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
+                <td><img :src="'storage/fotos/' + user.photo" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
             </tr>
             <tr>
                 <td>Name:</td>
@@ -78,8 +78,54 @@ export default {
             this.editingProfile = false;
             this.successMessage = 'User successfully modified';
             this.user= this.$store.state.user; 
-        }
+        },
+
+        profileErroPass: function(){
+            this.showFailure = true;
+            this.showSuccess = false;
+            this.failMessage = 'Wrong Old Password!'
+        },
         
+        profileErroPassEqual: function(){
+            this.showFailure = true;
+            this.showSuccess = false;
+            this.failMessage = 'New Password and Old Password are the same!'
+        },
+
+        profileErroPassDiff: function(){
+            this.showFailure = true;
+            this.showSuccess = false;
+            this.failMessage = 'Password and confirm password are different!'
+        },
+
+        cancelEdit: function(){
+            this.editingProfile = false;
+        },
+
+        erroname: function(){
+            this.showFailure = true;
+            this.showSuccess = false;
+            this.failMessage = "The name format is invalid.";
+        },
+
+        erropass: function(){
+            this.showFailure = true;
+            this.showSuccess = false;
+            this.failMessage = "The password must be at least 3 characters.";
+        },
+
+        erronif: function(){
+            this.showFailure = true;
+            this.showSuccess = false;
+            this.failMessage = "The nif must be 9 digits.";
+        },
+
+        erroimage: function(){
+            this.showFailure = true;
+            this.showSuccess = false;
+            this.failMessage = "Invalide Image!";
+        },
+
     },
     components:{
         'profile-edit':ProfileEdit
