@@ -39,11 +39,8 @@ const routes = [
     { path: "/logout", component: LogoutComponent, name: "logout"},
     { path: "/products", component: Product, name: "products"},
     { path: "/userProfile", component: UserProfile, name: "usersProfile"},
-    { path: "/users/newAccount", component: UserRegister, name: "usersRegister"}
+    { path: "/users/newAccount", component: UserRegister, name: "usersRegister"},
     //{ path: "/logout", component: LogoutComponent},
-    { path: "/products", component: Product},
-    { path: "/userProfile", component: UserProfile},
-    { path: "/users/newAccount", component: UserRegister},
     { path: "/cookDashboard", component: cookDashboard},
     { path: "/customerShopCart", component: costumerCart}
 ]
