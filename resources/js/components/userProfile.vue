@@ -9,7 +9,7 @@
                 <td><img v-bind:src="'../storage/fotos/1_5fdb48c5e2d1d.jpg'" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
             </tr>
             <tr v-if="user.photo != null">
-                <td><img :src="'storage/app/fotos/' + user.photo" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
+                <td><img :src="'storage/fotos/' + user.photo" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
             </tr>
             <tr>
                 <td>Name:</td>

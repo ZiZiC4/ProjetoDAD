@@ -22,6 +22,7 @@ import Product from './components/product'
 import UserProfile from './components/userProfile'
 import UserRegister from './components/userRegister'
 import cookDashboard from './components/cookDashboard'
+import costumerCart from './components/costumerCart'
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
 //const login = Vue.component("login", Login);
@@ -37,7 +38,8 @@ const routes = [
     { path: "/products", component: Product},
     { path: "/userProfile", component: UserProfile},
     { path: "/users/newAccount", component: UserRegister},
-    { path: "/cookDashboard", component: cookDashboard}
+    { path: "/cookDashboard", component: cookDashboard},
+    { path: "/customerShopCart", component: costumerCart}
 ]
 
 const router = new VueRouter({

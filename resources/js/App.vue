@@ -14,6 +14,9 @@
         <template v-if="$store.state.user">
         <router-link to="/userProfile">userProfile</router-link> #
         </template>
+        <template>
+          <router-link to="/customerShopCart">Shopping Cart</router-link>
+        </template>
         
         <router-link to="/users/newAccount">Register </router-link>
         
