@@ -23,14 +23,13 @@ import LogoutComponent from './components/logout'
 import Product from './components/product'
 import UserProfile from './components/userProfile'
 import UserRegister from './components/userRegister'
-
-const home = Vue.component("home", Home);
-const user = Vue.component("users", UserComponent);
-const login = Vue.component("login", LoginComponent);
-const logout = Vue.component("logout", LogoutComponent);
-const product = Vue.component("products", Product);
-const userProfile = Vue.component("usersProfile", UserProfile);
-const userRegister = Vue.component("usersRegister", UserRegister);
+import cookDashboard from './components/cookDashboard'
+import costumerCart from './components/costumerCart'
+//const home = Vue.component("home", Home);
+//const user = Vue.component("users", User);
+//const login = Vue.component("login", Login);
+//const logout = Vue.component("logout", Logout);
+//const userRegister = Vue.component("usersRegister", UserRegister);
 
 
 const routes = [
@@ -41,6 +40,12 @@ const routes = [
     { path: "/products", component: Product, name: "products"},
     { path: "/userProfile", component: UserProfile, name: "usersProfile"},
     { path: "/users/newAccount", component: UserRegister, name: "usersRegister"}
+    //{ path: "/logout", component: LogoutComponent},
+    { path: "/products", component: Product},
+    { path: "/userProfile", component: UserProfile},
+    { path: "/users/newAccount", component: UserRegister},
+    { path: "/cookDashboard", component: cookDashboard},
+    { path: "/customerShopCart", component: costumerCart}
 ]
 
 const router = new VueRouter({

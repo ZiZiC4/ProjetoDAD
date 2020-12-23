@@ -19,15 +19,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="product in filterTerm"
-          :key="product.id"
-        >
+        <tr v-for="product in filterTerm" :key="product.id">
           <td>{{ product.name }}</td>
           <td>{{ product.type }}</td>
           <td>{{ product.photo }}</td>
           <td>{{ product.price }}</td>
           <td>{{ product.description }}</td>
+          <td v-if="$store.state.user.type == 'C'"><a class="btn btn-xs btn-primary" 
+          v-on:click.prevent="addProduct(product)">Add to shopping cart</a></td>
         </tr>
       </tbody>
     </table>
@@ -49,8 +48,10 @@ export default {
                 .then(response => {
                     this.products = response.data.data
                 })
+      },
+      addProduct: function(product){
+        this.$store.commit('addProductToOrder',product)
       }
-
     },
     computed: {
         filterTerm(){
