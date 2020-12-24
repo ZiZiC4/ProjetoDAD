@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in filterTerm" :key="product.id">
+        <tr v-for="(product,index) in filterTerm" :key="index">
           <td>{{ product.name }}</td>
           <td>{{ product.type }}</td>
           <td>{{ product.photo }}</td>

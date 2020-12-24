@@ -13,17 +13,10 @@
         <template v-if="$store.state.user && this.$store.state.user.type == 'EC'">
           <router-link to="/cookDashboard">Dashboard</router-link>
         </template>
-        <template v-if="!$store.state.user">
-          <router-link to="/login">Login</router-link> #
-        </template>
-        <template v-if="$store.state.user">
-        <router-link to="/userProfile">userProfile</router-link> #
-        </template>
         <template>
           <router-link to="/customerShopCart">Shopping Cart</router-link>
         </template>
         
-        <router-link to="/users/newAccount">Register </router-link>
         
         <!--<router-link to="/logout">Logout</router-link>-->
         <!--<a href="#" @click.prevent="logout">Logout</a> #-->

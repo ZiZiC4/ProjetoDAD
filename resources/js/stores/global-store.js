@@ -21,10 +21,18 @@ export default new Vuex.Store({
         addProductToOrder(state, product){
             state.orderProducts.push(product)
         },
-        removeProductFromOrder(state){
+        removeProductFromOrder(state,id){
            // var position = orderProducts.findIndex(prod => prod.id === id);
-            console.log("Hello")
+           // console.log(id)
            // state.orderProducts.splice(position, 1)
+           for(const idx in state.orderProducts){
+               const prod = state.orderProducts[idx]
+               if(prod.id == id){
+                   state.orderProducts.splice(idx,1)
+                   console.log("done")
+                   return
+               }
+           }
         },
         clearOrder(state){
             state.orderProducts = []

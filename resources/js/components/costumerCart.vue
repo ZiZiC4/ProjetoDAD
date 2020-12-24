@@ -9,14 +9,14 @@
                <th>Product Description</th>
            </thead>
            <tbody>
-               <tr v-for="product in $store.state.orderProducts"
-          :key="product.id">
+               <tr v-for="(product,index) in $store.state.orderProducts"
+          :key="index">
                    <td>{{product.name}}</td>
                    <td>{{product.price}}</td>
                    <td>{{product.description}}</td>
                    <td>{{product.id}}</td>
                    <td><a class="btn btn-xs btn-primary" 
-          v-on:click.prevent="removeProduct()">Remove From shopping cart</a></td>
+          v-on:click.prevent="removeProduct(product.id)">Remove From shopping cart</a></td>
                </tr>
            </tbody>
        </table>
@@ -39,8 +39,9 @@ export default {
                 this.totalPrice += parseFloat(prod.price)
             });
         },
-        removeProduct: function(){
-            this.$store.commit('removeProductFromOrder')
+        removeProduct: function(id){
+            //console.log(id)
+            this.$store.commit('removeProductFromOrder',id)
             //console.log("hello")
         }
     },
