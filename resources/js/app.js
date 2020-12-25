@@ -14,6 +14,9 @@ Vue.use(Toasted, {
 import { BPagination } from 'bootstrap-vue'
 Vue.component('b-pagination', BPagination)
 
+import VueSimpleAlert from "vue-simple-alert"
+Vue.use(VueSimpleAlert);
+
 import store from "./stores/global-store"
 
 import Home from './components/home'
