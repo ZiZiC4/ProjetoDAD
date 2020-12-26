@@ -44,18 +44,8 @@ Route::middleware('auth:api')->get('users/statsInative', 'UserController@getAllU
 //Route::get('/users',[UserController::class, 'index']);
 Route::get('/cookDashboard');
 Route::get('/customerShopCart');
-Route::get('/users',[UserController::class, 'index'])->middleware('manager');
-Route::post('users/newAccount', [UserController::class, 'store']);
 Route::get('/products',[ProductController::class, 'index']);
-Route::post('login', [AuthController::class, 'login']);
-//desta forma só quem está autenticado pode invocar o logout
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
-
-
-Route::post('login', [AuthController::class, 'login']);
-//desta forma só quem está autenticado pode invocar o logout
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
 
 //USERS
@@ -71,9 +61,5 @@ Route::middleware('auth:api')->patch('users/ProfilewithPass', [UserController::c
 Route::middleware('auth:api')->patch('users/ProfilewithoutPass', [UserController::class, 'updateProfilewithoutPass']);
 Route::middleware('auth:api')->get('users/profile', [UserController::class, 'profileRefresh']);
 
-
-
-//PRODUCTS
-Route::get('/products',[ProductController::class, 'index']);
 
 

@@ -79,13 +79,13 @@ class UserController extends Controller
         }
 
         $user = new User();
-        $user->fill($request->validated());
+        $user->fill($request->all());
         //$user->fill($request->all());
         $user->password = Hash::make($user->password);
         $user->photo = $request->photo['base64'] ? $request->photo['name'] : null;
         $user->save();
-        return new UserResource($user);
-        //return response()->json(new UserResource($user), 201);
+        //return new UserResource($user);
+        return response()->json(new UserResource($user), 201);
     }
 
 
