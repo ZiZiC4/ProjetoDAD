@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\OrderController;
 use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -77,3 +78,5 @@ Route::middleware('auth:api')->get('users/profile', [UserController::class, 'pro
 Route::get('/products',[ProductController::class, 'index']);
 
 
+//ORDERS
+Route::post('/orders',[OrderController::class,'createOrder']);

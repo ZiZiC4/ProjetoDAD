@@ -38,7 +38,7 @@ export default {
     data: function(){
         return{
             costumerName: this.$store.state.user.name,
-            totalPrice: 0
+            totalPrice: parseFloat(0)
         }
     },
     methods:{
@@ -63,9 +63,13 @@ export default {
             
         },
         postOrder: function(){
-            this.$prompt("Description (Optional):").then((text)=>{
-                
-            })
+            //this.$prompt("Description (Optional):").then((text)=>{
+                console.log(this.costumerName)
+                axios.post('/api/orders',this.costumerName)
+                            .then(response =>{
+                                console.log(response);
+                            })
+            //})
         }
     },
     computed:{
