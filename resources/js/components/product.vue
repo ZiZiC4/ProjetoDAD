@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in filterTerm" :key="product.id">
+        <tr v-for="(product,index) in filterTerm" :key="index">
           <td>{{ product.name }}</td>
           <td>{{ product.type }}</td>
           <td>{{ product.photo }}</td>
@@ -50,7 +50,21 @@ export default {
                 })
       },
       addProduct: function(product){
-        this.$store.commit('addProductToOrder',product)
+        this.$prompt("Quantity(integer only):",1).then((quantity)=>{
+          var quantidade = parseInt(quantity)
+          console.log(typeof quantidade)
+          if(!Number.isInteger(quantidade)){
+            this.$alert("It must be an Integer")
+            return
+          }else{
+            var order = {
+              prod: product,
+              quant: quantidade
+            }
+            this.$store.commit('addProductToOrder',order)  
+          }
+        })
+        
       }
     },
     computed: {

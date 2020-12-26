@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
       user: null,
-      orderProducts:[],
+      orderProducts:[]
     },
     mutations: {
         clearUser (state) {
@@ -18,13 +18,24 @@ export default new Vuex.Store({
             state.user = user
             sessionStorage.setItem('user', JSON.stringify(user))
         },
-        addProductToOrder(state, product){
-            state.orderProducts.push(product)
+        addProductToOrder(state, order){
+            console.log(typeof order.quant)
+            console.log(order.quant)
+            state.orderProducts.push(order)
+            console.log(state.orderProducts)
         },
-        removeProductFromOrder(state){
+        removeProductFromOrder(state,id){
            // var position = orderProducts.findIndex(prod => prod.id === id);
-            console.log("Hello")
+           // console.log(id)
            // state.orderProducts.splice(position, 1)
+           for(const idx in state.orderProducts){
+               const prod = state.orderProducts[idx]
+               if(prod.prod.id == id){
+                   state.orderProducts.splice(idx,1)
+                   console.log("done")
+                   return
+               }
+           }
         },
         clearOrder(state){
             state.orderProducts = []

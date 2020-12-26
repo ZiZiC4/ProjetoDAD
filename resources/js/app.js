@@ -14,6 +14,9 @@ Vue.use(Toasted, {
 import { BPagination } from 'bootstrap-vue'
 Vue.component('b-pagination', BPagination)
 
+import VueSimpleAlert from "vue-simple-alert"
+Vue.use(VueSimpleAlert);
+
 import store from "./stores/global-store"
 
 import Home from './components/home'
@@ -25,6 +28,7 @@ import UserProfile from './components/userProfile'
 import UserRegister from './components/userRegister'
 import cookDashboard from './components/cookDashboard'
 import costumerCart from './components/costumerCart'
+import RegisterAdminComponent from './components/adminRegister'
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
 //const login = Vue.component("login", Login);
@@ -42,8 +46,12 @@ const routes = [
     { path: "/users/newAccount", component: UserRegister, name: "usersRegister"},
     //{ path: "/logout", component: LogoutComponent},
     { path: "/cookDashboard", component: cookDashboard},
-    { path: "/customerShopCart", component: costumerCart}
+    { path: "/customerShopCart", component: costumerCart},
+    {path : "/registerAdmin", component: RegisterAdminComponent},
 ]
+
+const registerAdmin = Vue.component("registerAdmin", RegisterAdminComponent);
+
 
 const router = new VueRouter({
     routes:routes
