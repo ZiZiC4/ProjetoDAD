@@ -42,6 +42,12 @@ Route::middleware('auth:api')->get('users/statsInative', 'UserController@getAllU
 */
 
 
+
+
+
+  //admin
+  Route::post('adminRegister', 'AdminControllerAPI@register');
+
 //Route::get('/users',[UserController::class, 'index']);
 Route::get('/cookDashboard');
 Route::get('/customerShopCart');

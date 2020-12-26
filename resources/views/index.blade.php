@@ -12,6 +12,17 @@
         <body>
         <div class="container" id="app">
         </div>
+
+        <div v-if="this.$store.state.user.type == 'a'">
+                  <li>
+                      <router-link class="btn btn-outline-dark" to="/registerAdmin">Resgister an Operator/Admin</router-link>
+                      <br>
+                  </li>
+                  <li>
+                      <router-link class="btn btn-outline-dark"to="/userManagement">Manage Users</router-link>
+                      <br>
+                  </li>
+          </div>
     <script src="js/app.js"></script>
     </body>
 </html>
