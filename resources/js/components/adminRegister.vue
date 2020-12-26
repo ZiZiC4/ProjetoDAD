@@ -9,12 +9,16 @@
             <div class="form-group">
               <label>Type</label>
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" value="a" name="type" id="type_admin" v-model="user.type">
+                <input type="radio" class="custom-control-input" value="EM" name="type" id="type_admin" v-model="user.type">
                 <label class="custom-control-label" for="type_admin">Admin</label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" value="o" name="type" id="type_operator" v-model="user.type">
-                <label class="custom-control-label" for="type_operator">Operator</label>
+                <input type="radio" class="custom-control-input" value="EC" name="type" id="type_cooks" v-model="user.type">
+                <label class="custom-control-label" for="type_cooks">Cook</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" value="ED" name="type" id="type_deliverymen" v-model="user.type">
+                <label class="custom-control-label" for="type_deliverymen">deliverymen</label>
               </div>
             </div>
             <div class="form-group" >
@@ -44,7 +48,7 @@
                 </form>
 
                <div class="text-center">
-                  <button class="btn btn-primary" @click="registerAdmin()">Register</button>
+                  <button class="btn btn-primary" @click="adminRegister()">Register</button>
                </div>
                <br>
 
@@ -75,7 +79,7 @@
   },
   methods: {
 
-            registerAdmin(){
+            adminRegister(){
               axios.post('api/adminRegister', this.user).then(response=>{
                 alert("User Registed!");
                 //this.$router.push('/login')

@@ -13,9 +13,8 @@
         <template>
           <router-link to="/customerShopCart">Shopping Cart</router-link>
         </template>
-          <template>
-          <router-link to="/registerAdmin">MANAGE: REGISTER</router-link>
-        </template>
+          <router-link to="/adminRegister">MANAGE: REGISTER</router-link>
+    
         
         <!--<router-link to="/logout">Logout</router-link>-->
         <!--<a href="#" @click.prevent="logout">Logout</a> #-->
