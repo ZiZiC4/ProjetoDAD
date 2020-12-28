@@ -20,36 +20,23 @@
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <!--<td v-if="user.type != 'C' || user.type == 'EC' || user.type == 'ED'"> - </td>-->
+
+                <!-- <a v-if="user.blocked =='0' " class="btn btn-sm btn-secondary" v-on:click.prevent="deactivateUser(user)">Deactivate</a>
+              <a v-if="user.blocked =='1' " class="btn btn-sm btn-primary" v-on:click.prevent="activateUser(user)">Activate</a> -->
                 <td>
-<<<<<<< Updated upstream
                     <a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)">Edit</a>
                     <a
                         class="btn btn-xs btn-primary"
                         v-if="user.id != currentUser.id"
                         v-on:click.prevent="blockUser(user)"
-=======
-                    <!--<a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)">Edit</a>-->
-                    <!-- <a
-                        class="btn btn-xs btn-primary"
-                        v-if="user.id != currentUser.id && user.type != 'EM'"
-                        v-on:click.prevent="deactivateUser(user)"
->>>>>>> Stashed changes
                         >Block</a
-                    > -->
-
-
-            
-              <!-- <a v-if="user.blocked =='0' " class="btn btn-sm btn-secondary" v-on:click.prevent="deactivateUser(user)">Deactivate</a>
-              <a v-if="user.blocked =='1' " class="btn btn-sm btn-primary" v-on:click.prevent="activateUser(user)">Activate</a>     -->
-                            <a
-                            class="btn btn-xs btn-primary"
-                            v-on:click.prevent="editUser(user)"
-                        >Edit</a>      
+                    >
                     <a
                         class="btn btn-xs btn-danger"
                         v-if="user.id != currentUser.id"
                         v-on:click.prevent="deleteUser(user)"
-                        >Delete</a>
+                        >Delete</a
+                    >
                 </td>
                 <td>
                     <a v-if="user.type == 'C'">Customer</a>
@@ -57,10 +44,10 @@
                     <a v-if="user.type == 'ED'">Employee-Deliveryman</a>
                     <a v-if="user.type == 'EM'">Employee-Manager</a>
                 </td>
-                <!-- <td>
+                <td>
                     <a v-if="user.blocked == 0">Active></a>
                     <a v-if="user.blocked == 1">Blocked></a>
-                </td> -->
+                </td>
             </tr>
         </tbody>
     </table>
@@ -79,14 +66,10 @@ export default {
             this.currentUser = user //faz com que o click em edit fique a azul
             this.$emit('edit-user',user)
         },*/
-         editUser: function (user) {
-      this.editingUser = user
-      this.$emit('edit-click', user)
-    },
         deleteUser(user) {
             this.$emit("delete-user", user);
         },
-        deactivateUser(user) {
+        blockUser(user) {
             this.$emit("block-user", user);
         },
         activateUser(user){
