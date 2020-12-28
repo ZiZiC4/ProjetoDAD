@@ -68,6 +68,9 @@ export default {
         },
         blockUser(user) {
             this.$emit("block-user", user);
+        },
+        activateUser(user){
+            this.$emit('activate-user', user)
         }
     }
 };

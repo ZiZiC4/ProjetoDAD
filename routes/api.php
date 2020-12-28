@@ -46,7 +46,8 @@ Route::middleware('auth:api')->get('users/statsInative', 'UserController@getAllU
 
 
   //admin
-  //Route::post('/adminRegister', [AdminController::class, 'register']);
+  Route::middleware('auth:api')->delete('users/destroy/{id}', 'AdminController@destroy');
+  Route::middleware('auth:api')->put('users/activate/{id}', 'AdminController@activateUser');
 
 //Route::get('/users',[UserController::class, 'index']);
 Route::get('/cookDashboard');
@@ -68,6 +69,11 @@ Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::cl
 Route::middleware('auth:sacntum')->patch('users/ProfilewithPass', [UserController::class, 'updateProfilewithPass']);
 Route::middleware('auth:sanctum')->patch('users/ProfilewithoutPass', [UserController::class, 'updateProfilewithoutPass']);
 Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
+
+
+Route::post('login', [AuthController::class, 'login']);
+//desta forma só quem está autenticado pode invocar o logout
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
 
 
