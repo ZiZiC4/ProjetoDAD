@@ -8,5 +8,10 @@ use App\Models\User;
 
 class CookController extends Controller
 {
-    //
+    public function getOrder(Request $request)
+    {
+        //$novaOrder = new Order;
+        dd($request)
+        return "OK";
+    }
 }

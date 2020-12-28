@@ -54,28 +54,31 @@ export default {
         removeProduct: function(id){
             //console.log(id)
             this.$store.commit('removeProductFromOrder',id)
+            this.getPrice()
             //console.log("hello")
         },
         clearCart: function(){
             this.$confirm("Do you wish to remover your order?").then(()=>{
                 this.$store.commit('clearOrder')
             })
+
             
         },
         postOrder: function(){
-            //this.$prompt("Description (Optional):").then((text)=>{
-                console.log(this.costumerName)
-                axios.post('/api/orders',this.costumerName)
+            this.$prompt("Notes (Optional):","No notes to add").then((text)=>{
+                //console.log(this.costumerName)
+                axios.post('api/orders',{ customer_id: this.$store.state.user.id, products: this.$store.state.orderProducts,notes:text})
                             .then(response =>{
-                                console.log(response);
+                                console.log(response.data);
                             })
-            //})
+            })
         }
     },
     computed:{
 
     },
     mounted(){
+        this.getPrice();
     }
 }
 </script>
