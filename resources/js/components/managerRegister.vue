@@ -126,7 +126,7 @@
                         </div>
 
                     <div class="text-center">
-                        <button class="btn btn-primary" @click="adminRegister()">
+                        <button class="btn btn-primary" @click="managerRegister()">
                             Register
                         </button>
                     </div>
@@ -169,7 +169,7 @@
             },
             managerRegister() {
                 axios
-                    .post('api/users/newAccount', this.user)
+                    .post('api/users/newEmployee', this.user)
                     .then(response => {
                         Object.assign(this.user, response.data);
                         this.$router.push("/");

@@ -26,10 +26,9 @@ import LogoutComponent from './components/logout'
 import Product from './components/product'
 import UserProfile from './components/userProfile'
 import UserRegister from './components/userRegister'
-import ManagerRegister from './components/userRegister'
+import ManagerRegister from './components/managerRegister'
 import cookDashboard from './components/cookDashboard'
 import costumerCart from './components/costumerCart'
-import managerRegisterComponent from './components/managerRegister'
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
 //const login = Vue.component("login", Login);
@@ -44,8 +43,8 @@ const routes = [
     { path: "/logout", component: LogoutComponent, name: "logout"},
     { path: "/products", component: Product, name: "products"},
     { path: "/userProfile", component: UserProfile, name: "usersProfile"},
-    //{ path: "/users/newAccount", component: UserRegister, name: "usersRegister"},
-    { path: "/users/newAccount", component: ManagerRegister, name: "usersRegister"},
+    { path: "/users/newAccount", component: UserRegister, name: "usersRegister"},
+    { path: "/users/newEmployee", component: ManagerRegister, name: "managerRegister"},
     //{ path: "/users/managerRegister", component: managerRegisterComponent, name: "managerRegister"},
     { path: "/cookDashboard", component: cookDashboard},
     { path: "/customerShopCart", component: costumerCart},

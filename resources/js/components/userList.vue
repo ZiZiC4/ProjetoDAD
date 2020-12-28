@@ -21,16 +21,16 @@
                 <td>{{ user.email }}</td>
                 <!--<td v-if="user.type != 'C' || user.type == 'EC' || user.type == 'ED'"> - </td>-->
                 <td>
-                    <!--<a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)">Edit</a>-->
+                    <a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)">Edit</a>
                     <a
                         class="btn btn-xs btn-primary"
-                        v-if="user.id != currentUser.id && user.type != 'EM'"
+                        v-if="user.id != currentUser.id"
                         v-on:click.prevent="blockUser(user)"
                         >Block</a
                     >
                     <a
                         class="btn btn-xs btn-danger"
-                        v-if="user.id != currentUser.id && user.type != 'EM'"
+                        v-if="user.id != currentUser.id"
                         v-on:click.prevent="deleteUser(user)"
                         >Delete</a
                     >
