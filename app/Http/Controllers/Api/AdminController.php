@@ -96,10 +96,18 @@ class AdminControllerAPI extends Controller
     }
 
     public function activateUser($id){
-      $user = User::findOrFail($id);
-      $user->active = 1;
-      $user->save();
-      return new UserResource($user);
+        $user = User::findOrFail($id);
+        $active = DB::table('users')->select('active')->where('id', $id)->get();
+        if($active[0]->active == 0){
+            $user->active = 1;
+            $user->save();
+        }else{
+            $user = User::findOrFail($id);
+            $user->active = 0;
+            $user->save();
+            return new UserResource($user);
+        }
+        return new UserResource($user);
     }
 
 

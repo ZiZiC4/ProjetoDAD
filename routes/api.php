@@ -46,37 +46,31 @@ Route::middleware('auth:api')->get('users/statsInative', 'UserController@getAllU
 
 
   //admin
-  Route::post('adminRegister', 'AdminControllerAPI@register');
+  Route::middleware('auth:api')->delete('users/destroy/{id}', 'AdminController@destroy');
+  Route::middleware('auth:api')->put('users/activate/{id}', 'AdminController@activateUser');
 
 //Route::get('/users',[UserController::class, 'index']);
 Route::get('/cookDashboard');
 Route::get('/customerShopCart');
-Route::get('/users',[UserController::class, 'index'])->middleware('manager');
-Route::post('users/newAccount', [UserController::class, 'store']);
-Route::get('/products',[ProductController::class, 'index']);
-Route::post('login', [AuthController::class, 'login']);
-//desta forma só quem está autenticado pode invocar o logout
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
-
-
-
-Route::post('login', [AuthController::class, 'login']);
-//desta forma só quem está autenticado pode invocar o logout
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
 
 //USERS
-Route:: middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
+Route::middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
+Route::post('login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 Route::post('users/newAccount', [UserController::class, 'store']);
+//Route::middleware('auth:sanctum')->post('users/managerRegister', [UserController::class, 'storeEmployee']);
 Route::put('users/{user}',  [UserController::class, 'update']);
 //Route::delete('users/{user}',  [UserController::class, 'delete']);
 Route::post('users/filter', [UserController::class, 'index']);
-Route::middleware('auth:api')->put('users/{id}', [UserController::class, 'update']);
-Route::middleware('auth:api')->delete('users/destroy/{id}', [UserController::class, 'destroy']);
-Route::middleware('auth:api')->put('users/blocked/{id}', [UserController::class, 'blockedUser']);
-Route::middleware('auth:api')->patch('users/ProfilewithPass', [UserController::class, 'updateProfilewithPass']);
-Route::middleware('auth:api')->patch('users/ProfilewithoutPass', [UserController::class, 'updateProfilewithoutPass']);
-Route::middleware('auth:api')->get('users/profile', [UserController::class, 'profileRefresh']);
+Route::middleware('auth:sanctum')->put('users/{id}', [UserController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('users/destroy/{id}', [UserController::class, 'destroy']);
+Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::class, 'blockedUser']);
+Route::middleware('auth:sacntum')->patch('users/ProfilewithPass', [UserController::class, 'updateProfilewithPass']);
+Route::middleware('auth:sanctum')->patch('users/ProfilewithoutPass', [UserController::class, 'updateProfilewithoutPass']);
+Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
+
+
 
 
 

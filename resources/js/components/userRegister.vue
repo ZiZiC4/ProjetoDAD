@@ -120,7 +120,7 @@
             <a class="btn btn-primary" v-on:click.prevent="registerUser()"
                 >Register</a
             >
-            <a class="btn btn-danger" v-on:click.prevent="cancelRegister()"
+            <a class="btn btn-light" v-on:click.prevent="cancelRegister()"
                 >Cancel</a
             >
         </div>
@@ -174,6 +174,7 @@ export default {
                     Object.assign(this.user, response.data);
                     this.$router.push("/");
                     this.$toasted.show("User Created");
+                    console.log(response.data);
                 })
                 .catch((error) => {
                     console.error(error);

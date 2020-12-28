@@ -22,10 +22,9 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Email</th>
-                    <th>Actions</th>
-                    <th>Role</th>
-                    <th>State</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -96,7 +95,7 @@
             v-if="editingUser"
             v-bind:currentUser="currentUser"
             v-on:save-user="saveUser"
-            v-on:cancel-edit="cancelEdit"
+            v-on:cancel-register="cancelRegister"
         ></edit-list>
 
         <div class="alert alert-success" v-if="showSuccess">
@@ -228,7 +227,7 @@ export default {
             });
         },
 
-        blockedUser: function(user){
+        blockUser: function(user){
            axios.put("api/users/blocked/" + user.id).then((response) => {
                 this.showSuccess = true;
                 if (user.blocked == 0) {
@@ -237,6 +236,7 @@ export default {
                     this.successMessage = " User Blocked";
                 }
                 this.getResults(1);
+                
             });
         },
     },
