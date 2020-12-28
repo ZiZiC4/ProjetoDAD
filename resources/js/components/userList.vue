@@ -47,6 +47,9 @@ export default {
         },
         deleteUser(user){
             this.$emit('delete-user', user)
+        },
+        activateUser(user){
+            this.$emit('activate-user', user)
         }
         //fazer metodo blockedUser
     }
