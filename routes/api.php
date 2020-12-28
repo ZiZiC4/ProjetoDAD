@@ -46,7 +46,7 @@ Route::middleware('auth:api')->get('users/statsInative', 'UserController@getAllU
 
 
   //admin
-  Route::post('/adminRegister', [AdminController::class, 'register']);
+  //Route::post('/adminRegister', [AdminController::class, 'register']);
 
 //Route::get('/users',[UserController::class, 'index']);
 Route::get('/cookDashboard');
@@ -54,17 +54,20 @@ Route::get('/customerShopCart');
 
 
 //USERS
-Route:: middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
+Route::middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
+Route::post('login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 Route::post('users/newAccount', [UserController::class, 'store']);
+//Route::middleware('auth:sanctum')->post('users/managerRegister', [UserController::class, 'storeEmployee']);
 Route::put('users/{user}',  [UserController::class, 'update']);
 //Route::delete('users/{user}',  [UserController::class, 'delete']);
 Route::post('users/filter', [UserController::class, 'index']);
-Route::middleware('auth:api')->put('users/{id}', [UserController::class, 'update']);
-Route::middleware('auth:api')->delete('users/destroy/{id}', [UserController::class, 'destroy']);
-Route::middleware('auth:api')->put('users/blocked/{id}', [UserController::class, 'blockedUser']);
-Route::middleware('auth:api')->patch('users/ProfilewithPass', [UserController::class, 'updateProfilewithPass']);
-Route::middleware('auth:api')->patch('users/ProfilewithoutPass', [UserController::class, 'updateProfilewithoutPass']);
-Route::middleware('auth:api')->get('users/profile', [UserController::class, 'profileRefresh']);
+Route::middleware('auth:sanctum')->put('users/{id}', [UserController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('users/destroy/{id}', [UserController::class, 'destroy']);
+Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::class, 'blockedUser']);
+Route::middleware('auth:sacntum')->patch('users/ProfilewithPass', [UserController::class, 'updateProfilewithPass']);
+Route::middleware('auth:sanctum')->patch('users/ProfilewithoutPass', [UserController::class, 'updateProfilewithoutPass']);
+Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
 
 
 

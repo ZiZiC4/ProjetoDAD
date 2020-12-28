@@ -116,9 +116,9 @@ export default {
                     console.error(error)
                    if(error.response.data.errors.name){
                         this.$emit('profile-invalide-name');
-                    }else if(error.response.data.errors.nif){
+                    }/*else if(error.response.data.errors.nif){
                         this.$emit('profile-invalide-nif');
-                    }else if (error.response.data.errors.password){
+                    }*/else if (error.response.data.errors.password){
                         this.$emit('profile-invalide-password');
                     }else if (error.response.data.errors.photo){
                         this.$emit('profile-invalide-image');

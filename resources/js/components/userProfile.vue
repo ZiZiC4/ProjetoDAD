@@ -123,7 +123,7 @@ export default {
         erroimage: function(){
             this.showFailure = true;
             this.showSuccess = false;
-            this.failMessage = "Invalide Image!";
+            this.failMessage = "Invalid Image!";
         },
 
     },

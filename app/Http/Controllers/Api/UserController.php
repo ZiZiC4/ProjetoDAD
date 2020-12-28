@@ -58,15 +58,19 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
+  /*  public function store(Request $request){
+        //PARA O CUSTOMER
+    }*/
+
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:3',
-            'address' => 'required|min:5',
-            'phone' => 'required|min:9',
-            'nif' => 'integer|digits:9'
+            //'address' => 'required|min:5'
+            //'phone' => 'integer|min:9',
+            //'nif' => 'integer|digits:9'
         ]);
 
         if ($request->photo['base64']) {
@@ -80,12 +84,14 @@ class UserController extends Controller
 
         $user = new User();
         $user->fill($request->all());
-        //$user->fill($request->all());
+        //$user->fill($request->validated());
         $user->password = Hash::make($user->password);
-        $user->photo = $request->photo['base64'] ? $request->photo['name'] : null;
+        $user->photo_url = $request->photo['base64'] ? $request->photo['name'] : null;
+        //$user->customer()->nif = $request->nif;
         $user->save();
         //return new UserResource($user);
         return response()->json(new UserResource($user), 201);
+        //return $user;
     }
 
 
@@ -121,6 +127,7 @@ class UserController extends Controller
             $user->save();
             return new UserResource($user);
         }
+        return new UserResource($user);
     }
 
     public function profileRefresh(Request $request)
