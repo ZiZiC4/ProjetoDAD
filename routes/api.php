@@ -86,5 +86,4 @@ Route::get('/products',[ProductController::class, 'index']);
 
 
 //ORDERS
-Route::get('orders',[OrderController::class,'getOrder']);
-Route::post('orders',[OrderController::class,'createOrder']);
+Route::post('/orders',[OrderController::class,'createOrder']);

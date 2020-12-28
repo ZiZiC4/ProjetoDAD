@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function orderItems(){
-    	return $this->hasMany('App\Models\OrderItem','product_id','id');
+    public function orders(){
+    	return $this->belongsToMany('App\Models\Order','order_items','product_id','order_id')->using('App\Models\OrderItem');
     }
 }

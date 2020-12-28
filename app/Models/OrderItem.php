@@ -3,19 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class OrderItem extends Model
+class OrderItem extends Pivot
 {
     use HasFactory;
-
-    public $timestamps = false;
-    
-    public function order(){
-        return $this->belongsTo('App\Models\Order','order_id','id');
-    }
-
-    public function product(){
-        return $this->belongsTo('App\Models\Product','product_id','id');
-    }
 }
