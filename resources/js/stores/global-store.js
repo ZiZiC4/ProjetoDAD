@@ -19,10 +19,10 @@ export default new Vuex.Store({
             sessionStorage.setItem('user', JSON.stringify(user))
         },
         addProductToOrder(state, order){
-            console.log(typeof order.quant)
-            console.log(order.quant)
+            //console.log(typeof order.quant)
+            //console.log(order.quant)
             state.orderProducts.push(order)
-            console.log(state.orderProducts)
+            //console.log(state.orderProducts)
         },
         removeProductFromOrder(state,id){
            // var position = orderProducts.findIndex(prod => prod.id === id);

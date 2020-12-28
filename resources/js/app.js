@@ -47,7 +47,7 @@ const routes = [
     //{ path: "/logout", component: LogoutComponent},
     { path: "/cookDashboard", component: cookDashboard},
     { path: "/customerShopCart", component: costumerCart},
-    {path : "/registerAdmin", component: registerAdmin},
+    {path : "/registerAdmin", component: RegisterAdminComponent},
 ]
 
 const registerAdmin = Vue.component("registerAdmin", RegisterAdminComponent);
