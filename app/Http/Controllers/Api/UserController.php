@@ -129,7 +129,7 @@ class UserController extends Controller
             'email' => 'required|email|unique;users,email,' . $id,
         ]);
         $user = User::findOrFail($id);
-        $user->update($request->all());
+        $user->update($request->validated());
         return new UserResource($user);
     }
 
