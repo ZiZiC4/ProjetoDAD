@@ -58,7 +58,7 @@ Route::get('/customerShopCart');
 Route::middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
 Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
-Route::post('users/newAccount', [UserController::class, 'store']);
+Route::post('users/newAccount', [UserController::class, 'storeCustomer']);
 Route::post('users/newEmployee', [UserController::class, 'store']);
 //Route::middleware('auth:sanctum')->post('users/managerRegister', [UserController::class, 'storeEmployee']);
 Route::put('users/{user}',  [UserController::class, 'update']);
