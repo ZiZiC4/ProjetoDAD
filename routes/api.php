@@ -58,9 +58,9 @@ Route::get('/customerShopCart');
 Route::middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
 Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
-Route::post('users/newAccount', [UserController::class, 'store']);
+Route::post('users/newAccount', [UserController::class, 'storeCustomer']);
+Route::post('users/newEmployee', [UserController::class, 'store']);
 //Route::middleware('auth:sanctum')->post('users/managerRegister', [UserController::class, 'storeEmployee']);
-Route::put('users/{user}',  [UserController::class, 'update']);
 //Route::delete('users/{user}',  [UserController::class, 'delete']);
 Route::post('users/filter', [UserController::class, 'index']);
 Route::middleware('auth:sanctum')->put('users/{id}', [UserController::class, 'update']);
@@ -70,7 +70,13 @@ Route::middleware('auth:sacntum')->patch('users/ProfilewithPass', [UserControlle
 Route::middleware('auth:sanctum')->patch('users/ProfilewithoutPass', [UserController::class, 'updateProfilewithoutPass']);
 Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
 
+Route::put('userManagement/deactivate/{id}', 'AdminController@deactivateUser');
+Route::put('userManagement/activate/{id}', 'AdminController@activateUser');
 
+
+Route::post('login', [AuthController::class, 'login']);
+//desta forma só quem está autenticado pode invocar o logout
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
 
 
@@ -79,5 +85,4 @@ Route::get('/products',[ProductController::class, 'index']);
 
 
 //ORDERS
-Route::get('orders',[OrderController::class,'getOrder']);
-Route::post('orders',[OrderController::class,'createOrder']);
+Route::post('/orders',[OrderController::class,'createOrder']);

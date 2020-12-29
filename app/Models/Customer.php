@@ -9,10 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'address', 'phone', 'nif'
+    ];
 
     public function user(){
-        return $this->belongsTo('App\Models\User','id','id');
+        return $this->belongsTo(User::class, 'id');
     }
 
     public function orders(){

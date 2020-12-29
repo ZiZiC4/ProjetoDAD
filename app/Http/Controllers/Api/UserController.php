@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Hash;
 use App\Models\User;
+use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\User as UserResource;
@@ -39,9 +40,9 @@ class UserController extends Controller
             if ($request->filled('blocked')) {
                 $users->where('blocked', '=', $request->blocked);
             }
-            return UserResource::collection(User::paginate(10));
+            $users = UserResource::collection($users->paginate(10));
         } else {
-            return UserResource::collection(User::all());
+            $users = UserResource::collection(User::all());
         }
         return $users;
     }
@@ -58,9 +59,37 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-  /*  public function store(Request $request){
-        //PARA O CUSTOMER
-    }*/
+    public function storeCustomer(Request $request){
+        $request->validate([
+            'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:3',
+            'address' => 'required|min:5',
+            'phone' => 'integer|min:9',
+            'nif' => 'integer|digits:9'
+        ]);
+        if ($request->photo['base64']) {
+            $photo = $request->photo;
+            $base64str = explode(',', $photo['base64']);
+            $imageBin = base64_decode($base64str[1]);
+            if (!Storage::disk('public')->exists('fotos/' . $photo['name'])) {
+                Storage::disk('public')->put('fotos/' . $photo['name'], $imageBin);
+            }
+        }
+        
+        $user = new User();
+        $user->fill($request->all());
+        $user->password = Hash::make($user->password);
+        $user->photo_url = $request->photo['base64'] ? $request->photo['name'] : null;
+        $user->save();//primeiro grava-se os users e depois associa-se o customer
+        $customer = new Customer();
+        $customer->id = $user->id;
+        $customer->address = $user->address;
+        $customer->phone = $user->phone;
+        $customer->nif = $user->nif;
+        $customer->save();
+        return response()->json(new UserResource($user), 201);
+    }
 
     public function store(Request $request)
     {
@@ -68,9 +97,7 @@ class UserController extends Controller
             'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:3',
-            //'address' => 'required|min:5'
-            //'phone' => 'integer|min:9',
-            //'nif' => 'integer|digits:9'
+            'type' => 'required|in:EM,ED,EC'
         ]);
 
         if ($request->photo['base64']) {
@@ -102,7 +129,7 @@ class UserController extends Controller
             'email' => 'required|email|unique;users,email,' . $id,
         ]);
         $user = User::findOrFail($id);
-        $user->update($request->all());
+        $user->update($request->validated());
         return new UserResource($user);
     }
 

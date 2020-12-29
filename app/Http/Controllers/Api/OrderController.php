@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
-use App\Models\User;
-use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
@@ -86,7 +84,7 @@ class OrderController extends Controller
             
         }
         //$novaOrder = new Order;
-        //dd($request);
-        //return "OK";
+        dd($request)
+        return "OK";
     }
 }
