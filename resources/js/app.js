@@ -17,6 +17,10 @@ Vue.component('b-pagination', BPagination)
 import VueSimpleAlert from "vue-simple-alert"
 Vue.use(VueSimpleAlert);
 
+import ToggleSwitch from 'vuejs-toggle-switch'
+Vue.use(ToggleSwitch)
+
+
 import store from "./stores/global-store"
 
 import Home from './components/home'
@@ -49,7 +53,6 @@ const routes = [
     //{ path: "/users/managerRegister", component: managerRegisterComponent, name: "managerRegister"},
     { path: "/cookDashboard", component: cookDashboard},
     { path: "/customerShopCart", component: costumerCart},
-    {path : "/registerAdmin", component: RegisterAdminComponent},
 ]
 
 
