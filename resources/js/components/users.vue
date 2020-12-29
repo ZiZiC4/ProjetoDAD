@@ -84,12 +84,19 @@
             </tbody>
         </table>
 
+
+
         <user-list
             v-bind:users="users"
-            v-on:edit-user="editUser"
+            v-on:edit-click="editUser"
+            :selected-user="currentUser"
+            @edit-click="editUser"
             v-on:delete-user="deleteUser"
             v-on:block-user="blockUser"
         ></user-list>
+
+
+
 
         <edit-list
             v-if="editingUser"
@@ -97,6 +104,16 @@
             v-on:save-user="saveUser"
             v-on:cancel-register="cancelRegister"
         ></edit-list>
+
+
+
+
+        <user-edit
+      v-if="currentUser"
+      :user="currentUser"
+      @user-saved="saveUser"
+      @user-canceled="cancelEdit"
+    ></user-edit>
 
         <div class="alert alert-success" v-if="showSuccess">
             <button
@@ -137,9 +154,10 @@
 
 <script>
 import UserList from "./userList";
-//import UserEditComponent from "./userEdit";
+import UserEditComponent from "./userEdit";
 export default {
     components:{
+        "user-edit": UserEditComponent,
         "user-list": UserList
     },
 
@@ -178,20 +196,23 @@ export default {
             });
         },
         saveUser: function(user) {
-             this.editingUser = false;
-            axios
-                .put("api/users/" + user.id, user)
-                .then((response) => {
-                    this.showSuccess = true;
-                    this.successMessage = "Saved User with success";
-                    Object.assign(this.currentUser, response.data.data);
-                    Object.assign(
-                        this.users.find((u) => u.id == response.data.data.id),
-                        response.data.data
-                    );
-                    this.currentUser = null;
-                    this.editingUser = false;
-                });
+             this.showSuccess = true
+      this.successMessage = 'User Saved'
+        Object.assign(this.currentUser, user)
+      this.currentUser = null
+            // axios
+            //     .put('api/users/' + user.id, user)
+            //     .then((response) => {
+            //         this.showSuccess = true;
+            //         this.successMessage = "Saved User with success";
+            //         Object.assign(this.currentUser, response.data.data);
+            //         Object.assign(
+            //             this.users.find((u) => u.id == response.data.data.id),
+            //             response.data.data
+            //         );
+                 //   this.currentUser = null;
+                    // this.editingUser = false;
+           //     });
         },
         cancelEdit: function() {
             this.showSuccess = false;

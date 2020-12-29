@@ -61,7 +61,6 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 Route::post('users/newAccount', [UserController::class, 'storeCustomer']);
 Route::post('users/newEmployee', [UserController::class, 'store']);
 //Route::middleware('auth:sanctum')->post('users/managerRegister', [UserController::class, 'storeEmployee']);
-Route::put('users/{user}',  [UserController::class, 'update']);
 //Route::delete('users/{user}',  [UserController::class, 'delete']);
 Route::post('users/filter', [UserController::class, 'index']);
 Route::middleware('auth:sanctum')->put('users/{id}', [UserController::class, 'update']);

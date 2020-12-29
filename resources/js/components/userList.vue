@@ -24,8 +24,9 @@
                 <!-- <a v-if="user.blocked =='0' " class="btn btn-sm btn-secondary" v-on:click.prevent="deactivateUser(user)">Deactivate</a>
               <a v-if="user.blocked =='1' " class="btn btn-sm btn-primary" v-on:click.prevent="activateUser(user)">Activate</a> -->
                 <td>
-                    <a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)">Edit</a>
-                    <a
+                    <a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)"
+                    >Edit</a>
+                   <a
                         class="btn btn-xs btn-primary"
                         v-if="user.id != currentUser.id"
                         v-on:click.prevent="blockUser(user)"
@@ -55,10 +56,11 @@
 
 <script>
 export default {
-    props: ["users"],
+    props: ["users", 'selected'],
     data: function() {
         return {
-            currentUser: this.$store.state.user
+            currentUser: this.$store.state.user,
+            editingUser: null
         };
     },
     methods: {
@@ -66,6 +68,10 @@ export default {
             this.currentUser = user //faz com que o click em edit fique a azul
             this.$emit('edit-user',user)
         },*/
+         editUser: function (user) {
+         this.editingUser = user
+         this.$emit('edit-click', user)
+    },
         deleteUser(user) {
             this.$emit("delete-user", user);
         },
@@ -76,5 +82,5 @@ export default {
             this.$emit('activate-user', user)
         }
     }
-};
+}
 </script>

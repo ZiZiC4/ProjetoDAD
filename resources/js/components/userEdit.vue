@@ -37,9 +37,11 @@ export default {
     props: ['user'],
     methods: {
         saveUser: function() {
-            axios.put('api/users' + this.user.id, this.user).then(response => {
+            axios.put('api/users/' + this.user.id, this.user).
+            then(response => {
                 Object.assign(this.user, response.data.data)
                 this.$emit('user-saved', this.user)
+           //     this.$store.commit('setUser', this.user);
             });
         },
         cancelEdit: function() {
