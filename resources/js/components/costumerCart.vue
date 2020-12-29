@@ -63,19 +63,20 @@ export default {
             
         },
         postOrder: function(){
-            //this.$prompt("Description (Optional):").then((text)=>{
-                console.log(this.costumerName)
-                axios.post('/api/orders',this.costumerName)
-                            .then(response =>{
-                                console.log(response);
+            this.$prompt("Notes (Optional):","No notes to add").then((text)=>{
+                //console.log(this.costumerName)
+                axios.post('api/orders',{ customer_id: this.$store.state.user.id, products: this.$store.state.orderProducts,notes:text})
+                     .then(response =>{
+                                console.log(response.data);
                             })
-            //})
+            })
         }
     },
     computed:{
 
     },
     mounted(){
+        this.getPrice();
     }
 }
 </script>

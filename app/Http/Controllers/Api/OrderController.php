@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\User;
+use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
     
     public function createOrder(Request $request)
     {
-        //falta depois alterar o estado do cook para no available
+        
         $novaOrder = new Order;
         $novaOrder->customer_id = $request->customer_id;
         $novaOrder->notes = $request->notes;
@@ -25,9 +27,7 @@ class OrderController extends Controller
             $novaOrder->status = "H";
             $novaOrder->prepared_by = null;
         }
-        //$cook = User::where('type','EC')->orderBy('available_at','asc')->whereNotNull("available_at")->first();
-        
-        //$novaOrder->delivered_by = null;
+
         $novaOrder->total_price = 0;
         $ldate = date('Y-m-d');
         $tdate = date('Y-m-d H:i:s');
@@ -84,7 +84,7 @@ class OrderController extends Controller
             
         }
         //$novaOrder = new Order;
-        dd($request)
-        return "OK";
+        //dd($request)
+        return null;
     }
 }
