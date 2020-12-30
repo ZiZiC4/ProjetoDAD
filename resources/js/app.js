@@ -17,6 +17,10 @@ Vue.component('b-pagination', BPagination)
 import VueSimpleAlert from "vue-simple-alert"
 Vue.use(VueSimpleAlert);
 
+import ToggleSwitch from 'vuejs-toggle-switch'
+Vue.use(ToggleSwitch)
+
+
 import store from "./stores/global-store"
 
 import Home from './components/home'
