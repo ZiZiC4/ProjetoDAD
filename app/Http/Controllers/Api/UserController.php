@@ -66,7 +66,7 @@ class UserController extends Controller
             'password' => 'required|min:3',
             'address' => 'required|min:5',
             'phone' => 'integer|min:9',
-            'nif' => 'integer|digits:9'
+            'nif' => 'nullable|integer|digits:9'
         ]);
         if ($request->photo['base64']) {
             $photo = $request->photo;
@@ -83,10 +83,10 @@ class UserController extends Controller
         $user->photo_url = $request->photo['base64'] ? $request->photo['name'] : null;
         $user->save();//primeiro grava-se os users e depois associa-se o customer
         $customer = new Customer();
-        $customer->id = $user->id;
-        $customer->address = $user->address;
-        $customer->phone = $user->phone;
-        $customer->nif = $user->nif;
+        $customer->user()->associate($user);
+        $customer->address = $request->address;
+        $customer->phone = $request->phone;
+        $customer->nif = $request->nif;
         $customer->save();
         return response()->json(new UserResource($user), 201);
     }

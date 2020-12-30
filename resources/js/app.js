@@ -56,6 +56,7 @@ const router = new VueRouter({
 })
 
 import App from './App.vue'
+
 const app = new Vue({
     render: h => h(App),
     router,
