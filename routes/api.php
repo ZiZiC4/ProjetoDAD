@@ -64,6 +64,7 @@ Route::post('users/newEmployee', [UserController::class, 'store']);
 //Route::middleware('auth:sanctum')->post('users/managerRegister', [UserController::class, 'storeEmployee']);
 //Route::delete('users/{user}',  [UserController::class, 'delete']);
 Route::post('users/filter', [UserController::class, 'index']);
+
 Route::middleware('auth:sanctum')->put('users/{id}', [UserController::class, 'update']);
 Route::middleware('auth:sanctum')->delete('users/destroy/{id}', [UserController::class, 'destroy']);
 Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::class, 'blockedUser']);
@@ -74,13 +75,6 @@ Route::put('cook/{user}',[UserController::class,'updateState']);
 
 Route::put('userManagement/deactivate/{id}', 'AdminController@deactivateUser');
 Route::put('userManagement/activate/{id}', 'AdminController@activateUser');
-
-
-Route::post('login', [AuthController::class, 'login']);
-//desta forma só quem está autenticado pode invocar o logout
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
-
-
 
 //PRODUCTS
 Route::get('/products',[ProductController::class, 'index']);

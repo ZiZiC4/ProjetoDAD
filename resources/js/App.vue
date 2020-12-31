@@ -23,8 +23,9 @@
 </template>
 
 <script>
+import UserComponent from './components/users'
 export default {
- 
+ 'user': UserComponent
 }
 </script>
 
