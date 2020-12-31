@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Hash;
 use App\Models\User;
 use App\Models\Customer;
+use App\Models\Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\User as UserResource;
@@ -266,5 +267,24 @@ class UserController extends Controller
         $total[1] = $totalActive;
 
         return $total;
+    }
+
+    public function updateState(Request $request,User $user){
+        
+        
+        if($request->state){
+            $order = Order::where('prepared_by',$user->id)->where('status','P')->get();
+            if(!$order){
+                $tdate = date('Y-m-d H:i:s');
+                $user->available_at = $tdate;
+                $user->save();
+            }
+
+        }else{
+            $user->available_at = null;
+            $user->save();
+        }
+
+        return $request;
     }
 }

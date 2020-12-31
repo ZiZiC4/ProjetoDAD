@@ -61,10 +61,12 @@ class OrderController extends Controller
         $user = $request->user();
         if($user->type==="EC"){
             $order = Order::where('prepared_by',$user->id)->where('status','=','P')->orderBy('opened_at','asc')->first();
+            $user->available_at = null;
             if(!$order){
                 $order = Order::where('prepared_by',null)->where('status','=','H')->orderBy('opened_at','asc')->first();
                 if($order){
                     $order->prepared_by = $user->id;
+                    $user->available_at = null;
                     $order->status = "P";
                     $order->save();
                 }else{
@@ -83,8 +85,53 @@ class OrderController extends Controller
             
             
         }
-        //$novaOrder = new Order;
-        //dd($request)
         return null;
     }
+
+    public function updateOrder(Request $request, Order $order){
+        
+        if($request->type=="EC"){
+            $cook = User::find($order->prepared_by);
+            $order->status = "R";
+            $tdate = date('Y-m-d H:i:s');
+            $cook->available_at = $tdate;
+            $order->current_status_at=$tdate;
+            $order->save();
+            $cook->save();
+
+            return $order;
+        }else if($request->type=="ED"){
+            $tdate = date('Y-m-d H:i:s');
+            $delMan = User::find($request->id);
+            $delMan->available_at = null;
+            
+            $order->delivered_by = $delMan->id;
+            $order->current_status_at = $tdate;
+            $order->status = "T";
+            $user = User::with('customer')->find($order->customer_id);
+            $items = OrderItem::with('product')->where('order_id',$order->id)->get(['product_id','quantity']);
+            $delMan->save();
+            $order->save();
+            return response()->json(['items' => $items,'userInfo'=>$user],200);
+        }
+    }
+
+
+    public function getReadyOrders(Request $request){
+
+        $orders = Order::where('status','R')->get();
+
+        $nomes = array();
+        foreach($orders as $order){
+             $user=User::find($order->customer_id);
+             array_push($nomes,$user->name);
+            //$teste=$order->customer_id;
+        }
+
+        return response()->json(['orders'=>$orders,'clientInfo'=>$nomes],200);
+
+    }
+
+
+
 }

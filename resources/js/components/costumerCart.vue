@@ -68,6 +68,7 @@ export default {
                 axios.post('api/orders',{ customer_id: this.$store.state.user.id, products: this.$store.state.orderProducts,notes:text})
                      .then(response =>{
                                 console.log(response.data);
+                                this.clearCart();
                             })
             })
         }

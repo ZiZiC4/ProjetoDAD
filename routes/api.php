@@ -54,6 +54,7 @@ Route::get('/cookDashboard');
 Route::get('/customerShopCart');
 
 
+
 //USERS
 Route::middleware('auth:sanctum')->get('users/me', [UserController::class, 'me']);
 Route::post('login', [AuthController::class, 'login']);
@@ -69,6 +70,7 @@ Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::cl
 Route::middleware('auth:sacntum')->patch('users/ProfilewithPass', [UserController::class, 'updateProfilewithPass']);
 Route::middleware('auth:sanctum')->patch('users/ProfilewithoutPass', [UserController::class, 'updateProfilewithoutPass']);
 Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
+Route::put('cook/{user}',[UserController::class,'updateState']);
 
 Route::put('userManagement/deactivate/{id}', 'AdminController@deactivateUser');
 Route::put('userManagement/activate/{id}', 'AdminController@activateUser');
@@ -87,3 +89,5 @@ Route::get('/products',[ProductController::class, 'index']);
 //ORDERS
 Route::post('/orders',[OrderController::class,'createOrder']);
 Route::get('orders',[OrderController::class,'getOrder']);
+Route::get('/delivery/orders',[OrderController::class,'getReadyOrders']);
+Route::put('/orders/{order}',[OrderController::class,'updateOrder']);
