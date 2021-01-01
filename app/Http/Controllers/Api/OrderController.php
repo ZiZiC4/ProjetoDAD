@@ -132,6 +132,20 @@ class OrderController extends Controller
 
     }
 
+    public function deliverOrder(Request $request, Order $order){
+
+        $order->status = "D";
+        $tdate = date('Y-m-d H:i:s');
+        $order->current_status_at=$tdate;
+        $order->closed_at=$tdate;
+        $order->save();
+        $delMan = User::find($request->id);
+        $delMan->available_at = $tdate;
+        $delMan->save();
+
+        return $delMan->available_at;
+    }
+
 
 
 }

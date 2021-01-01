@@ -71,7 +71,8 @@ Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::cl
 Route::middleware('auth:sacntum')->patch('users/ProfilewithPass', [UserController::class, 'updateProfilewithPass']);
 Route::middleware('auth:sanctum')->patch('users/ProfilewithoutPass', [UserController::class, 'updateProfilewithoutPass']);
 Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
-Route::put('cook/{user}',[UserController::class,'updateState']);
+Route::put('cook/{user}',[UserController::class,'updateCookState']);
+Route::put('delivery/{user}',[UserController::class,'updateDelState']);
 
 Route::put('userManagement/deactivate/{id}', 'AdminController@deactivateUser');
 Route::put('userManagement/activate/{id}', 'AdminController@activateUser');
@@ -84,4 +85,5 @@ Route::get('/products',[ProductController::class, 'index']);
 Route::post('/orders',[OrderController::class,'createOrder']);
 Route::get('orders',[OrderController::class,'getOrder']);
 Route::get('/delivery/orders',[OrderController::class,'getReadyOrders']);
+Route::put('/delivery/orders/{order}',[OrderController::class,'deliverOrder']);
 Route::put('/orders/{order}',[OrderController::class,'updateOrder']);

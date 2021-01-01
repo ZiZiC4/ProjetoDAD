@@ -29,12 +29,14 @@
             <thead>
                 <th>Product Name</th>
                 <th>Product Description</th>
+                <th>Quantity</th>
                 <th>Photo</th>
             </thead>
             <tbody v-if="order!=null">
               <tr v-for="(product,index) in order.items" :key="index">
                 <td>{{product.product.name}}</td>
                 <td>{{product.product.description}}</td>
+                <td>{{product.quantity}}</td>
                 <td><img :src="'storage/products/' + product.product.photo_url" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
               </tr>
             </tbody>

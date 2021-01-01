@@ -269,7 +269,7 @@ class UserController extends Controller
         return $total;
     }
 
-    public function updateState(Request $request,User $user){
+    public function updateCookState(Request $request,User $user){
         
         
         if($request->state){
@@ -286,5 +286,20 @@ class UserController extends Controller
         }
 
         return $request;
+    }
+
+    public function updateDelState(Request $request, User $user)
+    {
+        if($request->state){
+            $order = Order::where('delivered_by',$user->id)->where('status','T')->get();
+            if(!$order){
+                $tdate = date('Y-m-d H:i:s');
+                $user->available_at = $tdate;
+                $user->save();
+            }
+        }else{
+            $user->available_at = null;
+            $user->save();
+        }
     }
 }
