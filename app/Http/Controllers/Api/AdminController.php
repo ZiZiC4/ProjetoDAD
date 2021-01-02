@@ -88,37 +88,7 @@ class AdminControllerAPI extends Controller
       $user = User::findOrFail($id);
       $user->delete();
       return response()->json(null, 204);
-    }
 
-    public function deactivateUser($id){
-        $user = User::findOrFail($id);
-        $active = DB::table('users')->select('blocked')->where('id', $id)->get();
-        if($blocked[0]->blocked == 0){
-            $user->blocked = 1;
-            $user->save();
-        }else{
-            $user = User::findOrFail($id);
-            $user->active = 0;
-            $user->save();
-            return new UserResource($user);
-        }
-        return new UserResource($user);
-    }
-
-    public function activateUser($id){
-        $user = User::findOrFail($id);
-        $active = DB::table('users')->select('blocked')->where('id', $id)->get();
-        if($blocked[1]->blocked == 1){
-            $user->blocked = 0;
-            $user->save();
-        }else{
-            $user = User::findOrFail($id);
-            $user->active = 1;
-            $user->save();
-            return new UserResource($user);
-        }
-        return new UserResource($user);
-    }
 
 
 }

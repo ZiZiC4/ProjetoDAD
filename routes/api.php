@@ -79,8 +79,8 @@ Route::put('delivery/{user}',[UserController::class,'updateDelState']);
 
 //PRODUCTS
 Route::get('/products',[ProductController::class, 'index']);
-
 Route::post('/product/newProduct', [ProductController::class, 'storeProduct']);
+Route::put('/products/{id}',[ProductController::class, 'updateProduct']);
 
 //ORDERS
 Route::post('/orders',[OrderController::class,'createOrder']);

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderItem extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+   //use SoftDeletes;
     public $timestamps = false;
     
     public function order(){
