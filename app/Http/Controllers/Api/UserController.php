@@ -232,12 +232,15 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
+        //$user = User::find($id);
+        if ($user->type == 'C') {
+           $user->customer()->delete();
+        }
         $user->delete();
-        return response()->json(null, 204);
+        Storage::delete('public/fotos/' . $user->photo_url);
+        return response()->json($user, 204);
     }
 
 

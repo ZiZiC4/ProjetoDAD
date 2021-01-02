@@ -64,9 +64,9 @@ export default {
         },
         postOrder: function(){
             this.$prompt("Notes (Optional):","No notes to add").then((text)=>{
-                
+                    
                 axios.post('api/orders',{ customer_id: this.$store.state.user.id, products: this.$store.state.orderProducts,notes:text})
-                     .then(response =>{
+                    .then(response =>{
                                 console.log(response.data);
                                 this.clearCart();
                             })

@@ -23,7 +23,7 @@ export default new Vuex.Store({
             //console.log(typeof order.quant)
             //console.log(order.quant)
             state.orderProducts.push(order)
-            sessionStorage.setItem('cart',orderProducts)
+            //sessionStorage.setItem('cart',orderProducts)
             //console.log(state.orderProducts)
         },
         removeProductFromOrder(state,id){
@@ -65,7 +65,7 @@ export default new Vuex.Store({
             if(sessionStorage.getItem('cart')=== null){
                 context.commit('clearOrder')
             }else{
-                contex.commit('setOrder',sessionStorage.getItem('cart'))
+                //contex.commit('setOrder',sessionStorage.getItem('cart'))
             }
         }
     } 
