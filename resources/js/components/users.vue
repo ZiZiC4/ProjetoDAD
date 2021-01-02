@@ -84,20 +84,6 @@
       @user-canceled="cancelEdit"
     ></user-edit>
 
-    <!--<user-list
-      v-bind:users="users"
-      v-on:edit-user="editUser"
-      v-on:delete-user="deleteUser"
-      v-on:block-user="blockUser"
-    ></user-list>
-
-    <edit-list
-      v-if="editingUser"
-      v-bind:currentUser="currentUser"
-      v-on:save-user="saveUser"
-      v-on:cancel-edit="cancelEdit"
-    ></edit-list>-->
-
     <div>
       <b-pagination
         align="left"
@@ -114,108 +100,89 @@
 </template>
 
 <script>
-  import UserListComponent from "./userList";
-  import UserEditComponent from "./userEdit";
-  export default {
-    components: {
-      "user-list": UserListComponent,
-      "user-edit": UserEditComponent,
+import UserListComponent from "./userList";
+import UserEditComponent from "./userEdit";
+export default {
+  components: {
+    "user-list": UserListComponent,
+    "user-edit": UserEditComponent,
+  },
+
+  data: function () {
+    return {
+      title: "List of Users",
+      page: 1,
+      total: 1,
+      editingUser: false,
+      showSuccess: false,
+      showFailure: false,
+      successMessage: "",
+      failMessage: "",
+      currentUser: null,
+      users: [],
+      search: {
+        name: "",
+        type: "",
+        email: "",
+        blocked: "",
+      },
+    };
+  },
+  methods: {
+
+    deleteUser: function (user) {
+      axios.delete("api/users/destroy/" + user.id).then((response) => {
+        console.log(response);
+        this.showSuccess = true;
+        this.successMessage = "User Deleted with success";
+        this.getResults(1)
+      });
     },
-
-    data: function () {
-      return {
-        title: "List of Users",
-        page: 1,
-        total: 1,
-        editingUser: false,
-        showSuccess: false,
-        showFailure: false,
-        successMessage: "",
-        failMessage: "",
-        currentUser: null,
-        users: [],
-        search: {
-          name: "",
-          type: "",
-          email: "",
-          blocked: "",
-        },
-      };
-    },
-    methods: {
-      editUser: function (user) {
-        //this.currentUser = user;
-        this.currentUser = Object.assign({}, user);
-        this.editingUser = true;
-        this.showSuccess = false;
-      },
-      deleteUser: function (user) {
-        axios.delete("api/users/destroy" + user.id).then((response) => {
-          this.showSuccess = true;
-          this.successMessage = "User Deleted with success";
-          this.getResults(1)
-        });
-      },
-      methods: {
-          editUser: function(user) {
-              //this.currentUser = user;
-              this.currentUser = Object.assign({}, user);
-              this.editingUser = true;
-              this.showSuccess = false;
-          },
-
-          deleteUser: function(user) {
-              axios.delete('api/users/destroy/'+user.id)
-              .then(response=>{
-                  this.getUsers();
-                  this.$toasted.success('User removed with success!');
-              })
-              .catch(error => {
-
-                  console.log(error);
-              });
-          },
-          /* deleteUser: function(user) {
-              axios.delete("api/users/destroy/" + user.id).then(response => {
-                  this.showSuccess = true;
-                  this.successMessage = "User Deleted with success";
-                  this.getResults(1);
-              });
-          }, */
-        
-      saveUser: function (user) {
-        this.showSuccess = true
-        this.successMessage = "User Saved"
-        Object.assign(this.currentUser, user)
-        this.currentUser = null
-      },
-      cancelEdit: function () {
-        this.showSuccess = false
-        // Copies user properties to this.currentUser
-        // without changing this.currentUser reference
-        Object.assign(this.currentUser, user)
-        this.currentUser = null
-      },
-      getResults(page) {
-        this.editingUser = false;
-        this.showFailure = false;
-        this.showSuccess = false;
-        axios
-          .post("api/users/filter?page=" + page, this.search)
-          .then((response) => {
-            this.users = response.data.data;
-            this.page = response.data.meta.current_page;
-            this.total = response.data.meta.total;
-          })
-          .catch((error) => {
-            this.failMessage = "Error, can't get the users!";
-            this.showFailure = true;
+        editUser: function(user) {
+            //this.currentUser = user;
+            this.currentUser = Object.assign({}, user);
+            this.editingUser = true;
             this.showSuccess = false;
-          });
-      },
+        },
+/* 
+        deleteUser: function(user) {
+            axios.delete('api/users/destroy/'+user.id)
+            .then(response=>{
+                this.getUsers();
+                this.$toasted.success('User removed with success!');
+            })
+            .catch(error => {
 
-      getUsers: function () {
-        axios.get("api/users").then((response) => {
+                console.log(error);
+            });
+        }, */
+        /* deleteUser: function(user) {
+            axios.delete("api/users/destroy/" + user.id).then(response => {
+                this.showSuccess = true;
+                this.successMessage = "User Deleted with success";
+                this.getResults(1);
+            });
+        }, */
+    saveUser: function (user) {
+      this.showSuccess = true
+      this.successMessage = "User Saved"
+      Object.assign(this.currentUser, user)
+      this.currentUser = null
+    },
+    cancelEdit: function () {
+      this.showSuccess = false
+      // Copies user properties to this.currentUser
+      // without changing this.currentUser reference
+      Object.assign(this.currentUser, user)
+      this.currentUser = null
+    },
+    getResults(page) {
+      this.editingUser = false;
+      this.showFailure = false;
+      this.showSuccess = false;
+      axios
+        .post("api/users/filter?page=" + page, this.search)
+        .then((response) => {
           this.users = response.data.data;
         });
       },
@@ -236,9 +203,5 @@
       //this.getUsers();
       this.getResults(1); 
     },
-  }
-  }
+}
 </script>
-
-<style>
-</style>

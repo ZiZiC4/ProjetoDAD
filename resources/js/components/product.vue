@@ -35,16 +35,21 @@
           <td v-if="$store.state.user.type == 'EM'"><a class="btn btn-xs btn-danger" 
           v-on:click.prevent="deleteProduct(product)">Delete</a></td>
           
+<!-- 
 
+        
+    <product-list
+      :product="products"
+      :selected-product="currentProduct"
+      @edit-click="editProduct"
+    ></product-list>
+ -->
 
-          
-
-        <user-edit
-      v-if="currentUser"
-      :user="currentUser"
-      @user-saved="saveUser"
-      @user-canceled="cancelEdit"
-    ></user-edit>
+        <product-edit
+      v-if="currentProduct"
+      :product="currentProduct"
+      @product-saved="saveProduct"
+    ></product-edit>
 
         </tr>
       </tbody>
@@ -65,14 +70,17 @@ export default {
         return{
             products: [],
             searchByName: "",
-            searchByType: ""
+            searchByType: "",
+            currentProduct: this.$store.state.product,
+            editingProduct: null,
         }
     },
 
     methods:{
       editProduct: function(product){
-      this.
-    this.$emit('edit-product', product)
+      this.currentProduct = Object.assign({}, product);
+      this.editingProduct = product;
+      this.$emit('edit-product', product)
       },
     
       getMenu: function(){
@@ -81,6 +89,12 @@ export default {
                     this.products = response.data.data
                 })
       },
+      saveProduct: function (product) {
+      this.showSuccess = true
+      this.successMessage = "Product Saved"
+      Object.assign(this.currentProduct, product)
+      this.currentProduct = null
+    },
       addProduct: function(product){
         this.$prompt("Quantity(integer only):",1).then((quantity)=>{
           var quantidade = parseInt(quantity)
@@ -99,6 +113,11 @@ export default {
         
       }
     },
+     watch: {
+    selectedProduct: function (val) {
+      this.editingProduct = this.selectedProduct;
+    },
+  },
     computed: {
         filterTerm(){
           var produtos = this.products

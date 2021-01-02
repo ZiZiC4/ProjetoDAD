@@ -31,7 +31,6 @@
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
 
-       
         <td>
           <a
             class="btn btn-xs btn-primary"

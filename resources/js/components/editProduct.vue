@@ -1,6 +1,6 @@
 <template>
     <div class="jumbotron">
-        <h2>{{ title }}</h2>
+        <h2>EDIT PRODUCT</h2>
                     <div class="form-group">
                             <label for="inputType">Type: </label>
                             <select
