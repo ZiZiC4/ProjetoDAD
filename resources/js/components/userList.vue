@@ -14,7 +14,7 @@
       <tr
         v-for="user in users"
         :key="user.id"
-        :class="{active: currentUser === user}"
+        :class="{ active: currentUser === user }"
       >
         <td v-if="user.photo">
           <img
@@ -34,27 +34,26 @@
         <!-- <a v-if="user.blocked =='0' " class="btn btn-sm btn-secondary" v-on:click.prevent="deactivateUser(user)">Deactivate</a>
               <a v-if="user.blocked =='1' " class="btn btn-sm btn-primary" v-on:click.prevent="activateUser(user)">Activate</a> -->
         <td>
-          <a class="btn btn-xs btn-primary" v-on:click.prevent="editUser(user)"
-            >Edit</a
-          >
           <a
             class="btn btn-xs btn-primary"
-            v-if="user.id != currentUser.id"
+            v-if="user.type != 'C'"
+            v-on:click.prevent="editUser(user)"
+            >Edit</a>
+          <a
+            class="btn btn-xs btn-primary"
+            v-if="user.id != currentUser.id && user.blocked == 0"
             v-on:click.prevent="blockUser(user)"
-            >Block</a
-          >
+            >Block</a>
           <a
-            class="btn btn-xs btn-primary"
-            v-if="user.id != currentUser.id"
-            v-on:click.prevent="activateUser(user)"
-            >Activate</a
-          >
+            class="btn btn-xs btn-success"
+            v-if="user.id != currentUser.id && user.blocked == 1"
+            v-on:click.prevent="blockUser(user)"
+            >Activate</a>
           <a
             class="btn btn-xs btn-danger"
             v-if="user.id != currentUser.id"
             v-on:click.prevent="deleteUser(user)"
-            >Delete</a
-          >
+            >Delete</a>
         </td>
         <td>
           <a v-if="user.type == 'C'">Customer</a>
@@ -63,8 +62,8 @@
           <a v-if="user.type == 'EM'">Employee-Manager</a>
         </td>
         <td>
-          <a v-if="user.blocked == 0">Active></a>
-          <a v-if="user.blocked == 1">Blocked></a>
+          <a v-if="user.blocked == 0">Active</a>
+          <a v-if="user.blocked == 1">Blocked</a>
         </td>
       </tr>
     </tbody>
@@ -77,28 +76,25 @@ export default {
   data: function () {
     return {
       currentUser: this.$store.state.user,
-      editingUser: null
-    }
+      editingUser: null,
+    };
   },
   watch: {
     selectedUser: function (val) {
-      this.editingUser = this.selectedUser
-    }
+      this.editingUser = this.selectedUser;
+    },
   },
   methods: {
     editUser: function (user) {
-      this.currentUser = user
-      this.$emit("edit-click", user)
+      this.editingUser = user;
+      this.$emit("edit-click", user);
     },
     deleteUser: function (user) {
-      this.editingUser = null
-      this.$emit("delete-click", user)
+      this.editingUser = null;
+      this.$emit("delete-click", user);
     },
     blockUser: function (user) {
-      this.$emit("block-user", user)
-    },
-    activateUser: function (user) {
-      this.$emit("activate-user", user)
+      this.$emit("block-user", user);
     },
   },
 };

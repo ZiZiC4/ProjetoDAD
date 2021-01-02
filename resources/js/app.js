@@ -49,7 +49,6 @@ const routes = [
     { path: "/userProfile", component: UserProfile, name: "usersProfile"},
     { path: "/users/newAccount", component: UserRegister, name: "usersRegister"},
     { path: "/users/newEmployee", component: ManagerRegister, name: "managerRegister"},
-    //{ path: "/users/managerRegister", component: managerRegisterComponent, name: "managerRegister"},
     { path: "/cookDashboard", component: cookDashboard},
     { path: "/customerShopCart", component: costumerCart},
 ]

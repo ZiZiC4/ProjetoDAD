@@ -36,7 +36,7 @@
 export default {
     props: ['user'],
     methods: {
-        saveUser: function() {
+        saveUser: function(user) {
             axios.put('api/users/' + this.user.id, this.user).
             then(response => {
                 Object.assign(this.user, response.data.data)

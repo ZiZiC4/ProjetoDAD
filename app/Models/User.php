@@ -25,6 +25,10 @@ class User extends Authenticatable
         'photo_url',
     ];
 
+    public function customer(){
+        return $this->hasOne('App\Models\Customer','id','id');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -43,11 +47,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-  
-    public function customer(){
-        return $this->hasMany('App\Models\Customer','id','id');
-    }
 
     public function ordersPrepared(){
         return $this->hasMany('App\Models\Order','prepared_by','id');

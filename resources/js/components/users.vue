@@ -67,13 +67,16 @@
       :selected-user="currentUser"
       @edit-click="editUser"
       @delete-click="deleteUser"
+      @block-user="blockUser"
     ></user-list>
+
     <div class="alert alert-success" v-if="showSuccess">
       <button type="button" class="close-btn" v-on:click="showSuccess = false">
         &times;
       </button>
       <strong>{{ successMessage }}</strong>
     </div>
+
     <user-edit
       v-if="currentUser"
       :user="currentUser"
@@ -121,7 +124,7 @@ export default {
 
   data: function () {
     return {
-      title: "List Users",
+      title: "List of Users",
       page: 1,
       total: 1,
       editingUser: false,
@@ -150,27 +153,14 @@ export default {
       axios.delete("api/users/destroy" + user.id).then((response) => {
         this.showSuccess = true;
         this.successMessage = "User Deleted with success";
-        this.getResults(1);
+        this.getResults(1)
       });
     },
     saveUser: function (user) {
-      this.showSuccess = true;
-      this.successMessage = "User Saved";
-      Object.assign(this.currentUser, users);
-      this.currentUser = null;
-      // axios
-      //     .put('api/users/' + user.id, user)
-      //     .then((response) => {
-      //         this.showSuccess = true;
-      //         this.successMessage = "Saved User with success";
-      //         Object.assign(this.currentUser, response.data.data);
-      //         Object.assign(
-      //             this.users.find((u) => u.id == response.data.data.id),
-      //             response.data.data
-      //         );
-      //   this.currentUser = null;
-      // this.editingUser = false;
-      //     });
+      this.showSuccess = true
+      this.successMessage = "User Saved"
+      Object.assign(this.currentUser, user)
+      this.currentUser = null
     },
     cancelEdit: function () {
       this.showSuccess = false
@@ -204,9 +194,9 @@ export default {
     },
 
     blockUser: function (user) {
-      axios.put("api/users/blocked/" + users.id).then((response) => {
+      axios.put("api/users/blocked/" + user.id).then((response) => {
         this.showSuccess = true;
-        if (users.blocked == 0) {
+        if (user.blocked == 0) {
           this.successMessage = " User Active ";
         } else {
           this.successMessage = " User Blocked";
