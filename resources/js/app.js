@@ -29,6 +29,8 @@ import UserRegister from './components/userRegister'
 import ManagerRegister from './components/managerRegister'
 import cookDashboard from './components/cookDashboard'
 import costumerCart from './components/costumerCart'
+import productCreate from './components/productCreate'
+
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
 //const login = Vue.component("login", Login);
@@ -48,12 +50,30 @@ const routes = [
     //{ path: "/users/managerRegister", component: managerRegisterComponent, name: "managerRegister"},
     { path: "/cookDashboard", component: cookDashboard},
     { path: "/customerShopCart", component: costumerCart},
+    { path: "/productCreate", component: productCreate},
+
 ]
+
+
+
+
+
 
 
 const router = new VueRouter({
     routes:routes
 })
+
+
+
+// import VueSocketIO from "vue-socket.io"
+// Vue.use(
+//  new VueSocketIO({
+//  debug: true,
+//  connection: "http://127.0.0.1:8080"
+//  })
+// )
+
 
 import App from './App.vue'
 const app = new Vue({

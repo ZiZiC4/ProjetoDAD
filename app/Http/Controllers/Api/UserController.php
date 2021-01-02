@@ -136,8 +136,10 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+      /*   $customer = Customer::findOrFail($id);
+        $customer->withTrashed()->delete(); */ //apaga tudo
         $user = User::findOrFail($id);
-        $user->delete();
+        $user->withTrashed()->delete();
         return response()->json(null, 204);
     }
 

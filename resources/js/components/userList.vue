@@ -72,7 +72,19 @@ export default {
          this.editingUser = user
          this.$emit('edit-click', user)
     },
-        deleteUser(user) {
+     /*    deleteUser: function(user) {
+            axios.delete('api/users/destroy/'+user.id)
+            .then(response=>{
+                this.getUsers();
+                this.$toasted.success('User removed with success!');
+            })
+            .catch(error => {
+
+                console.log(error);
+            }); */
+
+            deleteUser: function (user) {
+            this.editingUser = null
             this.$emit("delete-user", user);
         },
         blockUser(user) {

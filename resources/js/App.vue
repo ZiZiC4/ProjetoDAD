@@ -2,6 +2,9 @@
     <div>
         <router-link to="/">Home</router-link> #
         <router-link to="/products">Menu</router-link> -
+
+        
+
         <router-link to="/customerShopCart">Shopping Cart</router-link> #
         <router-link to="/login" v-if="!$store.state.user">Login</router-link>
         <router-link to="/userProfile" v-if="$store.state.user">userProfile</router-link> #
@@ -12,6 +15,7 @@
           <router-link to="/users/newEmployee">Register Employee</router-link> #
         </template>
         <router-link to="/logout" v-if="$store.state.user">Logout</router-link>
+        <router-link to="/productCreate">productCreate</router-link>
         
         <!--<router-link to="/logout">Logout</router-link>-->
         <!--<a href="#" @click.prevent="logout">Logout</a> #-->
