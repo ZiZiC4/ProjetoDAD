@@ -16,13 +16,13 @@
         :key="user.id"
         :class="{ active: currentUser === user }"
       >
-        <td v-if="user.photo">
+        <td v-if="user.photo_url">
           <img
-            v-bind:src="'' + user.photo"
+            v-bind:src="'storage/fotos/' + user.photo_url"
             style="width: 75px; height: 75px; border-radius: 50%"
           />
         </td>
-        <td v-if="!user.photo">
+        <td v-if="!user.photo_url">
           <img
             v-bind:src="''"
             style="width: 75px; height: 75px; border-radius: 50%"

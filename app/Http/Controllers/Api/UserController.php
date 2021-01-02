@@ -132,10 +132,10 @@ class UserController extends Controller
         $id = $request->userId;
         $user = User::findOrFail($id);
         if ($user->type == "C") {
-            $request->validated([
+            $request->validate([
             'name' => 'required|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
-            'email' => 'email|unique:users,email,',
-            'nif'   => 'integer|digits:9',
+            //'email' => 'email|unique:users,email,',
+            //'nif'   => 'integer|digits:9',
             'password' => 'min:3',
             ]);
         }else {
@@ -171,10 +171,10 @@ class UserController extends Controller
         $id = $request->userId;
         $user = User::findOrFail($id);
         if ($user->type == "C") {
-            $request->validated([
+            $request->validate([
             'name' => 'required|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
-            'email' => 'email|unique:users,email,',
-            'nif'   => 'integer|digits:9',
+            //'email' => 'email|unique:users,email,',
+            //'nif'   => 'integer|digits:9',
             ]);
         }else {
             $request->validate([

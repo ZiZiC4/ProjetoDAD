@@ -51,8 +51,12 @@ export default {
           { type: 'success' })
         })
           .catch(error => {
-            console.log('Invalid Authentication')
-            this.$toasted.show('Invalid Authentication', { type: 'error' })
+
+            if(error.request.status==403){
+              this.$toasted.show('User Blocked', { type: 'error' })
+            }else{
+              this.$toasted.show('Invalid Authentication', { type: 'error' })
+            }
           })
       })
     }

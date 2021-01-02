@@ -39,18 +39,18 @@
         <td>Name:</td>
         <td>{{ this.user.name }}</td>
       </tr>
-      <!-- <tr v-if="user.type == 'C'">
+          <tr v-if="user.type == 'C'&& customer">
                 <td>NIF:</td>
                 <td>{{ this.customer.nif}}</td>
             </tr>
-            <tr v-if="user.type == 'C'">
+            <tr v-if="user.type == 'C'&& customer">
                 <td>Address:</td>
                 <td>{{ this.customer.address}}</td>
             </tr>
-            <tr v-if="user.type == 'C'">
+            <tr v-if="user.type == 'C'&& customer">
                 <td>Phone:</td>
                 <td>{{ this.customer.phone}}</td>
-            </tr>-->
+            </tr>
       <tr>
         <td>E-Mail:</td>
         <td>{{ this.user.email }}</td>
@@ -104,11 +104,7 @@ export default {
         photo: this.$store.state.user.photo_url,
         type: this.$store.state.user.type,
       },
-      /*customer:{
-                nif: this.$store.state.customer.nif,
-                address: this.$store.state.customer.address,
-                phone: this.$store.state.customer.phone,
-            },*/
+      customer:null,
       editingProfile: false,
       showSuccess: false,
       showFailure: false,
@@ -183,19 +179,22 @@ export default {
       this.failMessage = "Invalid Image!";
     },
 
-    /*getCustomer: function(){
+    getCustomer: function(){
             if (this.$store.state.user.type == 'C') {
                 axios.get("api/customer/perfil", {id:this.$store.state.user.id}).then(response =>{
+                    console.log(response.data)
+                    this.customer = response.data.customerInfo
                     
-                    this.customer = response.data
                 })    
             } 
-        },*/
+        },
   },
   components: {
     "profile-edit": ProfileEdit,
   },
-  mounted() {},
+  mounted() {
+    this.getCustomer()
+  },
 };
 </script>
 

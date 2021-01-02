@@ -14,7 +14,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials) && Auth::user()->blocked == 0) {
             return Auth::user();
         } else if (Auth::attempt($credentials) && Auth::user()->blocked == 1) {
-            return response()->json(['message' => 'You have been blocked by a manager!'], 401);
+            return response()->json(['message' => 'You have been blocked by a manager!'], 403);
         }else{
             return response()->json(['message' => 'Unauthenticated.'], 401);
         }
