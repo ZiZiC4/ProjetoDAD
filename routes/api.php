@@ -21,18 +21,9 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-//admin
-Route::middleware('auth:api')->delete('users/destroy/{id}', 'AdminController@destroy');
-Route::middleware('auth:api')->put('users/activate/{id}', 'AdminController@activateUser');
-
 //Route::get('/users',[UserController::class, 'index']);
 Route::get('/cookDashboard');
 Route::get('/customerShopCart');
-
 
 
 //USERS
@@ -54,7 +45,7 @@ Route::middleware('auth:sanctum')->get('users',                 [UserController:
 Route::middleware('auth:sanctum')->get('users/emailavailable',  [UserController::class, 'emailAvailable']);
 Route::middleware('auth:sanctum')->get('users/{user}',          [UserController::class, 'show']);
 Route::middleware('auth:sanctum')->put('users/{user}',          [UserController::class, 'update']);
-Route::middleware('auth:sanctum')->delete('users/{id}',       [UserController::class, 'destroy']);
+Route::middleware('auth:sanctum')->delete('users/destroy/{user}',       [UserController::class, 'destroy']);
 Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::class, 'blockUser']);
 Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
 Route::middleware('auth:sanctum')->patch('users/ProfileWithPass', [UserController::class, 'updateProfileWithPass']);

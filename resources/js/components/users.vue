@@ -84,20 +84,6 @@
       @user-canceled="cancelEdit"
     ></user-edit>
 
-    <!--<user-list
-      v-bind:users="users"
-      v-on:edit-user="editUser"
-      v-on:delete-user="deleteUser"
-      v-on:block-user="blockUser"
-    ></user-list>
-
-    <edit-list
-      v-if="editingUser"
-      v-bind:currentUser="currentUser"
-      v-on:save-user="saveUser"
-      v-on:cancel-edit="cancelEdit"
-    ></edit-list>-->
-
     <div>
       <b-pagination
         align="left"
@@ -150,7 +136,8 @@ export default {
       this.showSuccess = false;
     },
     deleteUser: function (user) {
-      axios.delete("api/users/destroy" + user.id).then((response) => {
+      axios.delete("api/users/destroy/" + user.id).then((response) => {
+        console.log(response);
         this.showSuccess = true;
         this.successMessage = "User Deleted with success";
         this.getResults(1)

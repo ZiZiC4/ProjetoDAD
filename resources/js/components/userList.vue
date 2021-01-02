@@ -31,8 +31,6 @@
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
 
-        <!-- <a v-if="user.blocked =='0' " class="btn btn-sm btn-secondary" v-on:click.prevent="deactivateUser(user)">Deactivate</a>
-              <a v-if="user.blocked =='1' " class="btn btn-sm btn-primary" v-on:click.prevent="activateUser(user)">Activate</a> -->
         <td>
           <a
             class="btn btn-xs btn-primary"
