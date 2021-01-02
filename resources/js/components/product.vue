@@ -1,5 +1,8 @@
 <template>
   <div>
+    <td v-if="$store.state.user.type == 'EM'"><a class="btn btn-xs btn-primary" 
+          v-on:click.prevent="">Add new Product</a></td>
+
     <select v-model="searchByType">
        <option value="">Type of Product</option>
        <option value="hot dish">Hot Dish</option>
@@ -27,14 +30,37 @@
           <td>{{ product.description }}</td>
           <td v-if="$store.state.user.type == 'C'"><a class="btn btn-xs btn-primary" 
           v-on:click.prevent="addProduct(product)">Add to shopping cart</a></td>
+          <td v-if="$store.state.user.type == 'EM'"><a class="btn btn-xs btn-primary" 
+          v-on:click.prevent="editProduct(product)">Edit</a></td>
+          <td v-if="$store.state.user.type == 'EM'"><a class="btn btn-xs btn-danger" 
+          v-on:click.prevent="deleteProduct(product)">Delete</a></td>
+          
+
+
+          
+
+        <user-edit
+      v-if="currentUser"
+      :user="currentUser"
+      @user-saved="saveUser"
+      @user-canceled="cancelEdit"
+    ></user-edit>
+
         </tr>
       </tbody>
     </table>
   </div>
+
+  
 </template>
 
 <script>
+import ProductEditComponent from "./productEdit";
 export default {
+    componets:{
+      "product-edit": ProductEditComponent,
+
+    },
     data:function(){
         return{
             products: [],
@@ -42,7 +68,13 @@ export default {
             searchByType: ""
         }
     },
+
     methods:{
+      editProduct: function(product){
+      this.
+    this.$emit('edit-product', product)
+      },
+    
       getMenu: function(){
         axios.get('api/products')
                 .then(response => {

@@ -128,6 +128,49 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
+
+    public function destroy($id)
+    {
+      /*   $customer = Customer::findOrFail($id);
+        $customer->withTrashed()->delete(); */ //apaga tudo
+        $user = User::findOrFail($id);
+        $user->withTrashed()->delete();
+        return response()->json(null, 204);
+    }
+
+    public function blockedUser($id)
+    {
+        $user = User::findOrFail($id);
+        $blocked = DB::table('users')->select('blocked')->where('id', $id)->get();
+        if ($blocked[0]->blocked == 0) {
+            $user->blocked = 1;
+            $user->save();
+        } else {
+            $user = User::findOrFail($id);
+            $user->active = 0;
+            $user->save();
+            return new UserResource($user);
+        }
+        return new UserResource($user);
+    }
+
+    public function profileRefresh(Request $request)
+    {
+        return new UserResource($request->user());
+    }
+
+    public function emailAvailable(Request $request)
+    {
+        $totalEmail = 1;
+        if ($request->has('email') && $request->has('id')) {
+            $totalEmail = DB::table('users')->where('email', '=', $request->email)->where('id', '<>', $request->id)->count();
+        } else if ($request->has('email')) {
+            $totalEmail = DB::table('users')->where('email', '=', $request->email)->count();
+        }
+        return response()->json($totalEmail == 0);
+    }
+
+
     public function updateProfileWithPass(Request $request){
         $id = $request->userId;
         $user = User::findOrFail($id);
