@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import ProductEditComponent from "./productEdit";
+import ProductEditComponent from "./editProduct";
 export default {
     componets:{
       "product-edit": ProductEditComponent,

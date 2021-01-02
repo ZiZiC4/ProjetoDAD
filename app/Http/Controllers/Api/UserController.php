@@ -129,15 +129,6 @@ class UserController extends Controller
     }
 
 
-    public function destroy($id)
-    {
-      /*   $customer = Customer::findOrFail($id);
-        $customer->withTrashed()->delete(); */ //apaga tudo
-        $user = User::findOrFail($id);
-        $user->withTrashed()->delete();
-        return response()->json(null, 204);
-    }
-
     public function blockedUser($id)
     {
         $user = User::findOrFail($id);
@@ -264,21 +255,6 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function profileRefresh(Request $request)
-    {
-        return new UserResource($request->user());
-    }
-
-    public function emailAvailable(Request $request)
-    {
-        $totalEmail = 1;
-        if ($request->has('email') && $request->has('id')) {
-            $totalEmail = DB::table('users')->where('email', '=', $request->email)->where('id', '<>', $request->id)->count();
-        } else if ($request->has('email')) {
-            $totalEmail = DB::table('users')->where('email', '=', $request->email)->count();
-        }
-        return response()->json($totalEmail == 0);
-    }
 
 
     public function getAllUsersBlocked()

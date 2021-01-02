@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    //use SoftDeletes;
 
     public function orderItems(){
         return $this->hasMany('App\Models\OrderItem','order_id','id');

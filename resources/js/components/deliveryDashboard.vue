@@ -42,8 +42,8 @@
                 <tr>
                 <td>{{selectedOrder.id}}</td>
                 <td>{{orderUserInfo.name}}</td>
-                <td>{{orderUserInfo.customer[0].address}}</td>
-                <td>{{orderUserInfo.customer[0].phone}}</td>
+                <td>{{orderUserInfo.customer.address}}</td>
+                <td>{{orderUserInfo.customer.phone}}</td>
                 <td>{{orderUserInfo.email}}</td>
                 <td><img :src="'storage/fotos/' + orderUserInfo.photo_url" style="width:150px; height:150px; border-radius:50%; margin-bottom:25px; margin-right:25px; float:left;"></td>
                 <td>{{selectedOrder.current_status_at}}</td>
@@ -104,7 +104,7 @@ export default {
             this.selectedOrder = order;
             axios.put('api/orders/'+this.selectedOrder.id,{type:this.$store.state.user.type, id:this.$store.state.user.id })
                 .then(response => {
-
+                    console.log(response.userInfo)
                     this.orderPrductsInfo = response.data.items;
                     this.orderUserInfo = response.data.userInfo;
                     this.orders=null
