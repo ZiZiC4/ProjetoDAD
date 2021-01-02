@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Hash;
 Route::get('/cookDashboard');
 Route::get('/customerShopCart');
 
+Route::get('/productCreate');
+
 
 //USERS
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -36,6 +38,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 Route::post('users/newAccount', [UserController::class, 'storeCustomer']);
 Route::post('users/newEmployee', [UserController::class, 'store']);
+
 //Route::middleware('auth:sanctum')->post('users/managerRegister', [UserController::class, 'storeEmployee']);
 //Route::delete('users/{user}',  [UserController::class, 'delete']);
 Route::post('users/filter', [UserController::class, 'index']);
@@ -48,6 +51,18 @@ Route::middleware('auth:sanctum')->put('users/{user}',          [UserController:
 Route::middleware('auth:sanctum')->delete('users/destroy/{user}',       [UserController::class, 'destroy']);
 Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::class, 'blockUser']);
 Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
+
+
+
+Route::put('userManagement/deactivate/{id}', 'AdminController@deactivateUser');
+Route::put('userManagement/activate/{id}', 'AdminController@activateUser');
+
+
+Route::post('login', [AuthController::class, 'login']);
+//desta forma só quem está autenticado pode invocar o logout
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
+
+
 Route::middleware('auth:sanctum')->patch('users/ProfileWithPass', [UserController::class, 'updateProfileWithPass']);
 Route::middleware('auth:sanctum')->patch('users/ProfileWithoutPass', [UserController::class, 'updateProfileWithoutPass']);
 Route::put('cook/{user}',[UserController::class,'updateCookState']);
@@ -55,6 +70,8 @@ Route::put('delivery/{user}',[UserController::class,'updateDelState']);
 
 //PRODUCTS
 Route::get('/products',[ProductController::class, 'index']);
+
+Route::post('/product/newProduct', [ProductController::class, 'storeProduct']);
 
 //ORDERS
 Route::post('/orders',[OrderController::class,'createOrder']);

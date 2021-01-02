@@ -143,6 +143,33 @@ export default {
         this.getResults(1)
       });
     },
+    methods: {
+        editUser: function(user) {
+            //this.currentUser = user;
+            this.currentUser = Object.assign({}, user);
+            this.editingUser = true;
+            this.showSuccess = false;
+        },
+
+        deleteUser: function(user) {
+            axios.delete('api/users/destroy/'+user.id)
+            .then(response=>{
+                this.getUsers();
+                this.$toasted.success('User removed with success!');
+            })
+            .catch(error => {
+
+                console.log(error);
+            });
+        },
+        /* deleteUser: function(user) {
+            axios.delete("api/users/destroy/" + user.id).then(response => {
+                this.showSuccess = true;
+                this.successMessage = "User Deleted with success";
+                this.getResults(1);
+            });
+        }, */
+       
     saveUser: function (user) {
       this.showSuccess = true
       this.successMessage = "User Saved"
