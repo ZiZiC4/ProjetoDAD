@@ -11,6 +11,14 @@
                     placeholder="Fullname" value="" />
             </div>
 
+            <div class="form-group">
+                <label for="inputEmail">e-Mail</label>
+                <input
+                    type="text" class="form-control" v-model="email"
+                    name="email" id="inputMail" 
+                    placeholder="Fullname" value="" />
+            </div>
+
          <div class="form-group">
                 <label for="inputPhoto">Photo</label>
                 <input
@@ -24,13 +32,13 @@
                 />
             </div>
             
-            <div class="form-group" v-if="user.type == 'C'">
+            <!--<div class="form-group" v-if="user.type == 'C'">
                 <label for="inputNif">NIF</label>
                 <input
                     type="text" class="form-control" v-model="nif"
                     name="Nif" id="inputNif"
                     placeholder="Nif" value=""/>
-            </div>
+            </div>-->
 
             <div class="form-group">
                 <label for="inputPassword">Old Password</label>
@@ -69,16 +77,13 @@ export default {
     data:function(){
         return{
             name:this.user.name,
-            photo:this.user.photo,
-            nif:this.user.nif,
+            email:this.user.email,
             password:"",
             confirmpassword:"",
             oldpassword:"",
-            //showSuccess: false,
-            //showFailure: false,
             successMessage: '',
             failMessage: '',
-            photoBase64:'',
+            photoBase64: '',
             message:''
         }
     },
@@ -97,14 +102,14 @@ export default {
             };
             reader.readAsDataURL(file);
             
-        },        
+        },       
         saveProfile: function(){
 
            if(this.password == ''){
-                axios.patch('api/users/ProfilewithoutPass', {
+                axios.patch('api/users/ProfileWithoutPass', {
                     'name': this.name,
+                    'email': this.email,
                     'photo': this.photo,
-                    'nif':this.nif,
                     'base64':this.photoBase64,
                     'userId': this.user.id
                 }) 
@@ -115,22 +120,22 @@ export default {
                 .catch(error =>{
                     console.error(error)
                    if(error.response.data.errors.name){
-                        this.$emit('profile-invalide-name');
-                    }/*else if(error.response.data.errors.nif){
-                        this.$emit('profile-invalide-nif');
-                    }*/else if (error.response.data.errors.password){
-                        this.$emit('profile-invalide-password');
+                        this.$emit('profile-invalid-name');
+                    }else if(error.response.data.errors.nif){
+                        this.$emit('profile-invalid-email');
+                    }else if (error.response.data.errors.password){
+                        this.$emit('profile-invalid-password');
                     }else if (error.response.data.errors.photo){
-                        this.$emit('profile-invalide-image');
+                        this.$emit('profile-invalid-image');
                 }
                     this.$emit('profile-erro');
                 })
            }else if(this.password == this.confirmpassword && this.password != this.oldpassword ){
-                axios.patch('api/users/ProfilewithPass', {
+                axios.patch('api/users/ProfileWithPass', {
                     'oldpassword': this.oldpassword,
                     'name': this.name,
                     'photo': this.photo,
-                    'nif':this.nif,
+                    'email':this.email,
                     'base64':this.photoBase64,
                     'password': this.password,
                     'userId': this.user.id,
@@ -145,13 +150,13 @@ export default {
                             this.$emit('profile-erro-pass');
                         }
                     if(error.response.data.errors.name){
-                        this.$emit('profile-invalide-name');
+                        this.$emit('profile-invalid-name');
                     }else if(error.response.data.errors.nif){
-                        this.$emit('profile-invalide-nif');
+                        this.$emit('profile-invalid-email');
                     }else if (error.response.data.errors.password){
-                        this.$emit('profile-invalide-password');
+                        this.$emit('profile-invalid-password');
                     }else if (error.response.data.errors.image){
-                        this.$emit('profile-invalide-image');
+                        this.$emit('profile-invalid-image');
                 }    
                     this.$emit('profile-erro');
                 })

@@ -174,7 +174,7 @@
                         Object.assign(this.user, response.data);
                         this.$router.push("/");
                         this.$toasted.show("User Created");
-                        console.log(response.data);
+                        //console.log(response.data);
                     })
                     .catch(error => {
                         console.error(error);

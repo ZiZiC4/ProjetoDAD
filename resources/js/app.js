@@ -17,6 +17,10 @@ Vue.component('b-pagination', BPagination)
 import VueSimpleAlert from "vue-simple-alert"
 Vue.use(VueSimpleAlert);
 
+import ToggleSwitch from 'vuejs-toggle-switch'
+Vue.use(ToggleSwitch)
+
+
 import store from "./stores/global-store"
 
 import Home from './components/home'
@@ -31,6 +35,7 @@ import cookDashboard from './components/cookDashboard'
 import costumerCart from './components/costumerCart'
 import productCreate from './components/productCreate'
 
+import deliveryDashboard from './components/deliveryDashboard'
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
 //const login = Vue.component("login", Login);
@@ -47,11 +52,11 @@ const routes = [
     { path: "/userProfile", component: UserProfile, name: "usersProfile"},
     { path: "/users/newAccount", component: UserRegister, name: "usersRegister"},
     { path: "/users/newEmployee", component: ManagerRegister, name: "managerRegister"},
-    //{ path: "/users/managerRegister", component: managerRegisterComponent, name: "managerRegister"},
     { path: "/cookDashboard", component: cookDashboard},
     { path: "/customerShopCart", component: costumerCart},
     { path: "/productCreate", component: productCreate},
 
+    { path: "/deliveryDashboard", component: deliveryDashboard},
 ]
 
 
@@ -76,6 +81,7 @@ const router = new VueRouter({
 
 
 import App from './App.vue'
+
 const app = new Vue({
     render: h => h(App),
     router,
@@ -85,6 +91,7 @@ const app = new Vue({
     },
     created (){
         this.$store.dispatch('loadUserLogged')
+        this.$store.dispatch('rebuildOrderFromStorage')
     }
 }).$mount('#app')
 

@@ -7,18 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
+use App\Models\User;
 
 class Customer extends Model
 {
 
     use SoftDeletes;
     use HasFactory;
+
     protected $fillable = [
-        'address', 'phone', 'nif'
+        'id',
+        'address',
+        'phone',
+        'nif'
     ];
 
     public function user(){
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo('App\Models\User', 'id');
     }
 
     public function orders(){

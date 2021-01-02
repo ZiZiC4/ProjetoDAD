@@ -12,9 +12,8 @@ class Order extends Model
     use HasFactory;
     use SoftDeletes;
 
-    //perguntar amanha
-    public function products(){
-    	return $this->belongsToMany('App\Models\Product','order_items','order_id','product_id')->using('App\Models\OrderItem');
+    public function orderItems(){
+        return $this->hasMany('App\Models\OrderItem','order_id','id');
     }
 
     public function userPrepared(){
