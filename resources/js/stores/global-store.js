@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
       user: null,
-      orderProducts:[]
+      orderProducts:[],
+      cookState:false,
     },
     mutations: {
         clearUser (state) {
@@ -22,6 +23,7 @@ export default new Vuex.Store({
             //console.log(typeof order.quant)
             //console.log(order.quant)
             state.orderProducts.push(order)
+            sessionStorage.setItem('cart',orderProducts)
             //console.log(state.orderProducts)
         },
         removeProductFromOrder(state,id){
@@ -39,6 +41,14 @@ export default new Vuex.Store({
         },
         clearOrder(state){
             state.orderProducts = []
+            sessionStorage.removeItem('cart')
+        },
+        setOrder(state,cart){
+            state.orderProducts= cart
+            sessionStorage.setItem('cart',state.orderProducts)
+        },
+        changeCookState(state,stateBoolean){
+            state.cookState=stateBoolean;
         }
     },
     actions: {
@@ -50,6 +60,13 @@ export default new Vuex.Store({
                 .catch(error => {
                     context.commit('clearUser')
             })
+        },
+        rebuildOrderFromStorage (context){
+            if(sessionStorage.getItem('cart')=== null){
+                context.commit('clearOrder')
+            }else{
+                contex.commit('setOrder',sessionStorage.getItem('cart'))
+            }
         }
     } 
 })

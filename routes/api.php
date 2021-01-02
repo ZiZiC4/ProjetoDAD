@@ -34,6 +34,7 @@ Route::get('/cookDashboard');
 Route::get('/customerShopCart');
 
 
+
 //USERS
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
   return $request->user();
@@ -58,6 +59,8 @@ Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::cl
 Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
 Route::middleware('auth:sanctum')->patch('users/ProfileWithPass', [UserController::class, 'updateProfileWithPass']);
 Route::middleware('auth:sanctum')->patch('users/ProfileWithoutPass', [UserController::class, 'updateProfileWithoutPass']);
+Route::put('cook/{user}',[UserController::class,'updateCookState']);
+Route::put('delivery/{user}',[UserController::class,'updateDelState']);
 
 //PRODUCTS
 Route::get('/products',[ProductController::class, 'index']);
@@ -65,3 +68,6 @@ Route::get('/products',[ProductController::class, 'index']);
 //ORDERS
 Route::post('/orders',[OrderController::class,'createOrder']);
 Route::get('orders',[OrderController::class,'getOrder']);
+Route::get('/delivery/orders',[OrderController::class,'getReadyOrders']);
+Route::put('/delivery/orders/{order}',[OrderController::class,'deliverOrder']);
+Route::put('/orders/{order}',[OrderController::class,'updateOrder']);

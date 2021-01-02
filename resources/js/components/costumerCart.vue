@@ -43,7 +43,7 @@ export default {
     },
     methods:{
         getPrice: function(){
-
+            console.log(this.$store.state.user.id)
             for(const idx in this.$store.state.orderProducts){
                this.totalPrice += parseFloat(this.$store.state.orderProducts[idx].prod.price*this.$store.state.orderProducts[idx].quant).toFixed(2) 
            }
@@ -64,10 +64,11 @@ export default {
         },
         postOrder: function(){
             this.$prompt("Notes (Optional):","No notes to add").then((text)=>{
-                //console.log(this.costumerName)
+                
                 axios.post('api/orders',{ customer_id: this.$store.state.user.id, products: this.$store.state.orderProducts,notes:text})
                      .then(response =>{
                                 console.log(response.data);
+                                this.clearCart();
                             })
             })
         }

@@ -33,6 +33,7 @@ import UserRegister from './components/userRegister'
 import ManagerRegister from './components/managerRegister'
 import cookDashboard from './components/cookDashboard'
 import costumerCart from './components/costumerCart'
+import deliveryDashboard from './components/deliveryDashboard'
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
 //const login = Vue.component("login", Login);
@@ -51,6 +52,7 @@ const routes = [
     { path: "/users/newEmployee", component: ManagerRegister, name: "managerRegister"},
     { path: "/cookDashboard", component: cookDashboard},
     { path: "/customerShopCart", component: costumerCart},
+    { path: "/deliveryDashboard", component: deliveryDashboard},
 ]
 
 
@@ -69,6 +71,7 @@ const app = new Vue({
     },
     created (){
         this.$store.dispatch('loadUserLogged')
+        this.$store.dispatch('rebuildOrderFromStorage')
     }
 }).$mount('#app')
 
