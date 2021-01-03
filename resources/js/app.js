@@ -34,7 +34,6 @@ import ManagerRegister from './components/managerRegister'
 import cookDashboard from './components/cookDashboard'
 import costumerCart from './components/costumerCart'
 import productCreate from './components/productCreate'
-
 import deliveryDashboard from './components/deliveryDashboard'
 import ordersHistory from './components/historyList'
 //const home = Vue.component("home", Home);
@@ -56,22 +55,13 @@ const routes = [
     { path: "/cookDashboard", component: cookDashboard},
     { path: "/customerShopCart", component: costumerCart},
     { path: "/productCreate", component: productCreate},
-
     { path: "/deliveryDashboard", component: deliveryDashboard},
     { path: "/history" , component: ordersHistory}
 ]
 
-
-
-
-
-
-
 const router = new VueRouter({
     routes:routes
 })
-
-
 
 // import VueSocketIO from "vue-socket.io"
 // Vue.use(

@@ -2,22 +2,19 @@
     <div>
         <router-link to="/">Home</router-link> #
         <router-link to="/products">Menu</router-link> -
-
-        
-
         <router-link to="/customerShopCart">Shopping Cart</router-link> #
         <router-link to="/login" v-if="!$store.state.user">Login</router-link>
-        <router-link to="/userProfile" v-if="$store.state.user">userProfile</router-link> #
+        <router-link to="/userProfile" v-if="$store.state.user">User Profile</router-link> #
         <router-link to="/users/newAccount" v-if="!$store.state.user">Register </router-link>
         <router-link to="/cookDashboard" v-if="$store.state.user && this.$store.state.user.type == 'EC'">Cook Dashboard</router-link>
         <template v-if="$store.state.user && this.$store.state.user.type == 'EM'"> Manager Dashboard:
+          <router-link to="/productCreate">Add Product</router-link> -
           <router-link to="/users">List of Users</router-link> -
           <router-link to="/users/newEmployee">Register Employee</router-link> #
         </template>
         <router-link to="/deliveryDashboard" v-if="$store.state.user && this.$store.state.user.type == 'ED'">Delivery Dashboard</router-link>
         <router-link to="/history" v-if="$store.state.user && this.$store.state.user.type == 'C'">History#</router-link>
         <router-link to="/logout" v-if="$store.state.user">Logout</router-link>
-        <router-link to="/productCreate">productCreate</router-link>
         
         <!--<router-link to="/logout">Logout</router-link>-->
         <!--<a href="#" @click.prevent="logout">Logout</a> #-->
