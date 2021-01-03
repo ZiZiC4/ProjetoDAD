@@ -129,7 +129,12 @@ export default {
     };
   },
   methods: {
-
+    editUser: function (user) {
+      //this.currentUser = user;
+      this.currentUser = Object.assign({}, user);
+      this.editingUser = true;
+      this.showSuccess = false;
+    },
     deleteUser: function (user) {
       axios.delete("api/users/destroy/" + user.id).then((response) => {
         console.log(response);
@@ -138,38 +143,13 @@ export default {
         this.getResults(1)
       });
     },
-        editUser: function(user) {
-            //this.currentUser = user;
-            this.currentUser = Object.assign({}, user);
-            this.editingUser = true;
-            this.showSuccess = false;
-        },
-/* 
-        deleteUser: function(user) {
-            axios.delete('api/users/destroy/'+user.id)
-            .then(response=>{
-                this.getUsers();
-                this.$toasted.success('User removed with success!');
-            })
-            .catch(error => {
-
-                console.log(error);
-            });
-        }, */
-        /* deleteUser: function(user) {
-            axios.delete("api/users/destroy/" + user.id).then(response => {
-                this.showSuccess = true;
-                this.successMessage = "User Deleted with success";
-                this.getResults(1);
-            });
-        }, */
     saveUser: function (user) {
       this.showSuccess = true
       this.successMessage = "User Saved"
       Object.assign(this.currentUser, user)
       this.currentUser = null
     },
-    cancelEdit: function () {
+    cancelEdit: function (user) {
       this.showSuccess = false
       // Copies user properties to this.currentUser
       // without changing this.currentUser reference
@@ -184,24 +164,38 @@ export default {
         .post("api/users/filter?page=" + page, this.search)
         .then((response) => {
           this.users = response.data.data;
+          this.page = response.data.meta.current_page;
+          this.total = response.data.meta.total;
+        })
+        .catch((error) => {
+          this.failMessage = "Error, can't get the users!";
+          this.showFailure = true;
+          this.showSuccess = false;
         });
-      },
-
-      blockUser: function (user) {
-        axios.put("api/users/blocked/" + user.id).then((response) => {
-          this.showSuccess = true;
-          if (user.blocked == 0) {
-            this.successMessage = " User Active ";
-          } else {
-            this.successMessage = " User Blocked";
-          }
-          this.getResults(1);
-        });
-      },
     },
-    mounted() {
-      //this.getUsers();
-      this.getResults(1); 
+    getUsers: function () {
+      axios.get("api/users").then((response) => {
+        this.users = response.data.data;
+      });
     },
-}
+    blockUser: function (user) {
+      axios.put("api/users/blocked/" + user.id).then((response) => {
+        this.showSuccess = true;
+        if (user.blocked == 0) {
+          this.successMessage = " User Active ";
+        } else {
+          this.successMessage = " User Blocked";
+        }
+        this.getResults(1);
+      });
+    },
+  },
+  mounted() {
+    //this.getUsers();
+    this.getResults(1);
+  },
+};
 </script>
+
+<style>
+</style>

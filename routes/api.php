@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Hash;
 //Route::get('/users',[UserController::class, 'index']);
 Route::get('/cookDashboard');
 Route::get('/customerShopCart');
-
 Route::get('/productCreate');
 
 
@@ -39,8 +38,6 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 Route::post('users/newAccount', [UserController::class, 'storeCustomer']);
 Route::post('users/newEmployee', [UserController::class, 'store']);
 
-//Route::middleware('auth:sanctum')->post('users/managerRegister', [UserController::class, 'storeEmployee']);
-//Route::delete('users/{user}',  [UserController::class, 'delete']);
 Route::post('users/filter', [UserController::class, 'index']);
 Route::get('customer/perfil', [CustomerController::class, 'profile']);
 
@@ -51,18 +48,6 @@ Route::middleware('auth:sanctum')->put('users/{user}',          [UserController:
 Route::middleware('auth:sanctum')->delete('users/destroy/{user}',       [UserController::class, 'destroy']);
 Route::middleware('auth:sanctum')->put('users/blocked/{id}', [UserController::class, 'blockUser']);
 Route::middleware('auth:sacntum')->get('users/profile', [UserController::class, 'profileRefresh']);
-
-
-
-Route::put('userManagement/deactivate/{id}', 'AdminController@deactivateUser');
-Route::put('userManagement/activate/{id}', 'AdminController@activateUser');
-
-
-Route::post('login', [AuthController::class, 'login']);
-//desta forma só quem está autenticado pode invocar o logout
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
-
-
 Route::middleware('auth:sanctum')->patch('users/ProfileWithPass', [UserController::class, 'updateProfileWithPass']);
 Route::middleware('auth:sanctum')->patch('users/ProfileWithoutPass', [UserController::class, 'updateProfileWithoutPass']);
 Route::put('cook/{user}',[UserController::class,'updateCookState']);
@@ -71,7 +56,9 @@ Route::put('delivery/{user}',[UserController::class,'updateDelState']);
 //PRODUCTS
 Route::get('/products',[ProductController::class, 'index']);
 Route::post('/product/newProduct', [ProductController::class, 'storeProduct']);
-Route::put('/products/{id}',[ProductController::class, 'updateProduct']);
+Route::put('/products/{product}', [ProductController::class, 'updateProduct']);
+Route::delete('product/destroy/{product}',       [ProductController::class, 'destroy']);
+Route::get('/products/{product}', [ProductController::class, 'show']);
 
 //ORDERS
 Route::post('/orders',[OrderController::class,'createOrder']);
