@@ -36,6 +36,7 @@ import costumerCart from './components/costumerCart'
 import productCreate from './components/productCreate'
 
 import deliveryDashboard from './components/deliveryDashboard'
+import ordersHistory from './components/historyList'
 //const home = Vue.component("home", Home);
 //const user = Vue.component("users", User);
 //const login = Vue.component("login", Login);
@@ -57,6 +58,7 @@ const routes = [
     { path: "/productCreate", component: productCreate},
 
     { path: "/deliveryDashboard", component: deliveryDashboard},
+    { path: "/history" , component: ordersHistory}
 ]
 
 

@@ -147,5 +147,17 @@ class OrderController extends Controller
     }
 
 
+    public function getOrderHistory(Request $request, $id){
+        $orders = Order::where('customer_id',$id)->get();
+        return $orders;
+    }
+
+    public function getDetails(Order $order){
+
+        $items= OrderItem::with('product')->where('order_id',$order->id)->get(['product_id','quantity']);
+        return $items;
+    }
+
+
 
 }

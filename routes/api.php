@@ -79,3 +79,5 @@ Route::get('orders',[OrderController::class,'getOrder']);
 Route::get('/delivery/orders',[OrderController::class,'getReadyOrders']);
 Route::put('/delivery/orders/{order}',[OrderController::class,'deliverOrder']);
 Route::put('/orders/{order}',[OrderController::class,'updateOrder']);
+Route::get('/order/user/{id}',[OrderController::class,'getOrderHistory']);
+Route::get('/details/order/{order}',[OrderController::class,'getDetails']);

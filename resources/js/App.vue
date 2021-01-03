@@ -15,6 +15,7 @@
           <router-link to="/users/newEmployee">Register Employee</router-link> #
         </template>
         <router-link to="/deliveryDashboard" v-if="$store.state.user && this.$store.state.user.type == 'ED'">Delivery Dashboard</router-link>
+        <router-link to="/history" v-if="$store.state.user && this.$store.state.user.type == 'C'">History#</router-link>
         <router-link to="/logout" v-if="$store.state.user">Logout</router-link>
         <router-link to="/productCreate">productCreate</router-link>
         
